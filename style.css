@@ -1,0 +1,57 @@
+#c2d, #menu, #intro {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  image-rendering: pixelated; /* You definitely want this if you are doing pixel art */
+}
+
+/* Get rid of any margins, set background black, use flexbox to center */
+html, body {
+  margin: 0;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hide {
+  display: none !important;
+}
+
+#menu, #intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+li {
+  color: black;
+  background-color: white;
+  padding: 0.5em 1em;
+  margin: 0.5em;
+  user-select: none;
+  cursor: pointer;
+  font-variant-caps: small-caps;
+}
+
+li:hover {
+  background-color: aquamarine;
+}
+
+li:active {
+  background-color: aqua;
+}
+
+#intro {
+	max-width: 40ch;
+}
