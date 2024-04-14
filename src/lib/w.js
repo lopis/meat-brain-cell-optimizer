@@ -213,7 +213,7 @@ window.W = {
     W.lastFrame = now;
     requestAnimationFrame(W.draw);
     
-    if(W.next.camera.g){
+    if(W.next?.camera?.g){
       W.render(W.next[W.next.camera.g], dt, 1);
     }
     

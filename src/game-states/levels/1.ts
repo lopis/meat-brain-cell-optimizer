@@ -16,7 +16,7 @@ class Level1 implements State {
   }
 
   onEnter() {
-    controls.classList.remove('hide');
+    controls.classList.add('slide');
     range.value = '25';
 
     W.reset(c2d);
@@ -34,7 +34,10 @@ class Level1 implements State {
   }
 
   onLeave() {
+    W.reset(c2d);
+    W.clearColor(color4);
     document.removeEventListener('input', this.inputListener);
+    controls.classList.remove('slide');
   }
 
   onUpdate() {

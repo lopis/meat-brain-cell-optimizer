@@ -75,13 +75,18 @@ li:active {
 }
 
 #controls {
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 90%;
 	text-align: center;
 	margin: 2vh 0;
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
+	transform: translateY(calc(100% + 2vh));
+  transition: 500ms ease-in-out 100ms;
+}
+#controls.slide {
+	transform: translateY(0);
 }
 
 #fps {
