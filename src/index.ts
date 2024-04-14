@@ -1,13 +1,12 @@
 import { menuState } from './game-states/menu.state';
 import { createGameStateMachine, gameStateMachine } from './game-state-machine';
 import { controls } from '@/core/controls';
-import { drawEngine } from './core/draw-engine';
 
 createGameStateMachine(menuState);
 
 let previousTime = 0;
 const interval = 1000 / 60;
-drawEngine.init();
+let fpsBacklog: number[] = [];
 
 (function draw(currentTime: number) {
   const delta = currentTime - previousTime;
@@ -23,6 +22,12 @@ drawEngine.init();
     // If you do not limit your fps or account for the interval your game will be far too fast or far too 
     // slow for anyone with a different refresh rate than you.
     gameStateMachine.getState().onUpdate(delta);
+
+    fpsBacklog.push(1000 / delta);
+    if (fpsBacklog.length === 15) {
+      fps.innerHTML = `${Math.round(fpsBacklog.reduce((a, b) => a + b) / 15)}`;
+      fpsBacklog = [];
+    }
   }
   requestAnimationFrame(draw);
 })(0);

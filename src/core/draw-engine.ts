@@ -1,16 +1,21 @@
+export const color0 = '#ecfffb';
+export const color1 = '#05b38d';
+export const color2 = '#c330b2';
+export const color3 = '#6e0067';
+export const color4 = '#3300c0';
+export const color5 = '#070044';
+
 class DrawEngine {
 
   constructor() {
-    c2d.height = window.innerHeight;
-    c2d.width = window.innerWidth;
-  }
+    const resize = () => {
+      const size = Math.min(window.innerHeight, window.innerWidth);
+      c2d.height = size;
+      c2d.width = size;
+    };
 
-  init() {
-    W.reset(c2d);
-    W.camera({x:0,y:0,z:5, fov: 0});
-    W.light({x:0,y:-1,z:0});
-    W.ambient(0.2);
-    W.clearColor("#000000");
+    window.addEventListener('resize', resize);
+    resize();
   }
 
 }
