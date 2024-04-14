@@ -10,7 +10,9 @@ class DrawEngine {
 
   constructor() {
     const resize = () => {
+      // eslint-disable-next-line id-denylist
       c2d.height = c2d.clientHeight;
+      // eslint-disable-next-line id-denylist
       c2d.width = c2d.clientWidth;
     };
 

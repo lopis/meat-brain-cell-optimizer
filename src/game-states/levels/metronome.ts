@@ -5,10 +5,10 @@ import { gameStateMachine } from '@/game-state-machine';
 import W from '../../lib/w.js';
 import { twoCubesLevel } from './two-cubes.js';
 
-const MAX_FRAMES = 60;
-const AMPLITUDE_RANGE = 1.5;
-
 class Metronome implements State {
+  MAX_FRAMES = 60;
+  AMPLITUDE_RANGE = 1.5;
+
   frame = 0;
   amplitudeG1 = 1;
   amplitudeG2 = 0;
@@ -49,11 +49,11 @@ class Metronome implements State {
 
   onUpdate() {
     this.frame++;
-    if (this.frame > MAX_FRAMES) {
+    if (this.frame > this.MAX_FRAMES) {
       this.frame = 0;
     }
-    W.move({n:"G1", x:-0.5, y:-0.5, rz: this.amplitudeG1 * 30 * Math.cos(2 * Math.PI * this.frame / MAX_FRAMES)});
-    W.move({n:"G2", x: 0.5, y:-0.5, rz: this.amplitudeG2 * 30 * Math.cos(2 * Math.PI * this.frame / MAX_FRAMES)});
+    W.move({n:"G1", x:-0.5, y:-0.5, rz: this.amplitudeG1 * 30 * Math.cos(2 * Math.PI * this.frame / this.MAX_FRAMES)});
+    W.move({n:"G2", x: 0.5, y:-0.5, rz: this.amplitudeG2 * 30 * Math.cos(2 * Math.PI * this.frame / this.MAX_FRAMES)});
     
     this.counter++;
     if (this.counter > 20) {
@@ -64,12 +64,12 @@ class Metronome implements State {
 
   updateRange(event: Event) {
     // @ts-ignore
-    this.amplitudeG2 = AMPLITUDE_RANGE * (event?.target?.value) / 100;
+    this.amplitudeG2 = this.AMPLITUDE_RANGE * (event?.target?.value) / 100;
   }
 
   calculatePower() {
     const amplituceDifference = Math.abs(this.amplitudeG1 - this.amplitudeG2);
-    const value = 1 - amplituceDifference / AMPLITUDE_RANGE;
+    const value = 1 - amplituceDifference / this.AMPLITUDE_RANGE;
     const totalLedsOn = Math.round(5 * value);
 
     this.totalLedsOn = totalLedsOn;

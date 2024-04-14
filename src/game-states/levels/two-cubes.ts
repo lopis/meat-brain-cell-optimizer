@@ -1,6 +1,6 @@
 import { color0, color4 } from '@/core/draw-engine';
 import { State } from '@/core/state';
-import { newResultState, results } from '../result.state.js';
+import { newResultState, results } from '../result.state';
 import { gameStateMachine } from '@/game-state-machine';
 import W from '../../lib/w.js';
 
