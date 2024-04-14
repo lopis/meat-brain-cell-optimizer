@@ -2,6 +2,7 @@ import { color0, color4 } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import { newResultState, results } from '../result.state';
 import { gameStateMachine } from '@/game-state-machine';
+import W from '../../lib/w.js';
 
 class Level1 implements State {
   frameG1 = 0;
@@ -24,7 +25,7 @@ class Level1 implements State {
 
     W.reset(c2d);
     W.clearColor(color4);
-    W.camera({y:0.5,z:5, rx:-7, fov: 10});
+    W.camera({y:0.5,z:7, rx:-7, fov: 10});
     document.body.style.background = color4;
 
     W.group({n:"G1",ry:0});

@@ -10,9 +10,8 @@ class DrawEngine {
 
   constructor() {
     const resize = () => {
-      const size = Math.min(window.innerHeight, window.innerWidth);
-      c2d.height = size;
-      c2d.width = size;
+      c2d.height = c2d.clientHeight;
+      c2d.width = c2d.clientWidth;
     };
 
     window.addEventListener('resize', resize);
