@@ -100,7 +100,9 @@ li:active {
   position: fixed;
   top: 0;
   left: 0;
-  color: greenyellow;
+  color: var(--color-1);
+  padding: 1vh;
+  font-size: 10px;
 }
 
 
@@ -191,10 +193,11 @@ input[type=range]::-moz-range-thumb {
 }
 
 .led {
+  --color-lights: var(--color-5);
   position: relative;
-  height: 20px;
+  height: 15px;
   width: 20px;
-  background: var(--color-5);
+  background: var(--color-lights);
   margin: 1vh;
 }
 .led::after {
@@ -202,7 +205,7 @@ input[type=range]::-moz-range-thumb {
   height: 6px;
   width: 28px;
   position: absolute;
-  background: var(--color-5);
+  background: var(--color-lights);
   bottom: -6px;
   left: -4px;
 }
@@ -211,8 +214,11 @@ input[type=range]::-moz-range-thumb {
   height: 10px;
   width: 20px;
   position: absolute;
-  background: var(--color-5);
-  top: -6px;
+  background: var(--color-lights);
+  top: -10px;
   left: 0;
   border-radius: 99px 99px 0 0;
+}
+.led.on {
+  --color-lights: var(--color-0);
 }

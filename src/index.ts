@@ -25,7 +25,7 @@ let fpsBacklog: number[] = [];
 
     fpsBacklog.push(1000 / delta);
     if (fpsBacklog.length === 15) {
-      fps.innerHTML = `${Math.round(fpsBacklog.reduce((a, b) => a + b) / 15)}`;
+      fps.innerHTML = `${Math.round(fpsBacklog.reduce((a, b) => a + b) / 15)} FPS`;
       fpsBacklog = [];
     }
   }

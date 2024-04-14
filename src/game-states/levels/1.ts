@@ -4,11 +4,13 @@ import { resultState } from '../result.state';
 import { gameStateMachine } from '@/game-state-machine';
 
 class Level1 implements State {
-  private frameG1 = 0;
-  private frameG2 = 0;
-  private speed = -0.5;
-  private inputListener: (event: Event) => void;
-  private submitListener: () => void;
+  frameG1 = 0;
+  frameG2 = 0;
+  speed = -0.5;
+  inputListener: (event: Event) => void;
+  submitListener: () => void;
+
+  targetSpeed = 1;
 
   constructor() {
     this.inputListener = (event) => this.updateRange(event);
@@ -54,6 +56,7 @@ class Level1 implements State {
       this.frameG2 += 360;
     }
     W.move({n:"G2",ry:this.frameG2});
+    this.calculatePower();
   }
 
   updateRange(event: Event) {
@@ -67,6 +70,17 @@ class Level1 implements State {
     setTimeout(() => {
       gameStateMachine.setState(resultState);
     }, 500);
+  }
+
+  calculatePower() {
+    const speedDifference = 1 - Math.abs(this.targetSpeed - this.speed) / 100;
+    const phaseDifference = 1 - Math.abs(this.frameG1 - this.frameG2) / 360;
+
+    const totalLedsOn = Math.round(5 * (speedDifference * phaseDifference));
+
+    for (let index = 0; index < 5; index++) {
+      lights.children[index].classList.toggle('on', totalLedsOn >= index+1);
+    }
   }
 }
 

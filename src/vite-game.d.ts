@@ -11,6 +11,7 @@ declare const contGame: HTMLLIElement;
 declare const fullscreen: HTMLLIElement;
 declare const play: HTMLLIElement;
 
+declare const lights: HTMLDivElement;
 declare const controls: HTMLDivElement;
 declare const range: HTMLInputElement;
 declare const submit: HTMLButtonElement;
