@@ -1,6 +1,6 @@
-import { State } from '../core/state';
-import { controls } from '../core/controls';
-import { gameStateMachine } from '../game-state-machine';
+import { State } from '@/core/state';
+import { controls } from '@/core/controls';
+import { gameStateMachine } from '@/game-state-machine';
 import { gameState } from './game.state';
 
 class IntroState implements State {

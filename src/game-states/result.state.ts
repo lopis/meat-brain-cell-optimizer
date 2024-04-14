@@ -1,4 +1,4 @@
-import { State } from '../core/state';
+import { State } from '@/core/state';
 
 type Result = {
   title: string

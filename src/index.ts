@@ -1,6 +1,6 @@
 import { menuState } from './game-states/menu.state';
 import { createGameStateMachine, gameStateMachine } from './game-state-machine';
-import { controls } from './core/controls';
+import { controls } from '@/core/controls';
 
 createGameStateMachine(menuState);
 

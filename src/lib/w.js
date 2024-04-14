@@ -1,9 +1,9 @@
 // WebGL framework
 // ===============
 
-const debug = 1; // Enable shader/program compilation logs (optional)
+window.debug = 1; // Enable shader/program compilation logs (optional)
 
-const W = {
+window.W = {
   
   // List of 3D models that can be rendered by the framework
   // (See the end of the file for built-in models: plane, billboard, cube, pyramid...)
@@ -635,5 +635,3 @@ W.add("pyramid", {
   }
   W.add("sphere", {vertices, uv, indices});
 })();
-
-export default W;
