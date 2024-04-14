@@ -15,3 +15,11 @@ declare const lights: HTMLDivElement;
 declare const controls: HTMLDivElement;
 declare const range: HTMLInputElement;
 declare const submit: HTMLButtonElement;
+
+declare const result: HTMLDivElement;
+declare const resultTitle: HTMLHeadElement;
+declare const resultText: HTMLDivElement;
+declare const nextLevel: HTMLButtonElement;
+declare const retry: HTMLButtonElement;
+
+

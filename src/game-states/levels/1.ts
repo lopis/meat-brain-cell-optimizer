@@ -1,12 +1,13 @@
 import { color0, color4 } from '@/core/draw-engine';
 import { State } from '@/core/state';
-import { resultState } from '../result.state';
+import { newResultState, results } from '../result.state';
 import { gameStateMachine } from '@/game-state-machine';
 
 class Level1 implements State {
   frameG1 = 0;
   frameG2 = 0;
   speed = -0.5;
+  counter = 0;
   inputListener: (event: Event) => void;
   submitListener: () => void;
 
@@ -27,10 +28,10 @@ class Level1 implements State {
     document.body.style.background = color4;
 
     W.group({n:"G1",ry:0});
-    W.cube({g:"G1",x:0,y:0,ns:1,b:color0});
+    W.cube({g:"G1", w:1.5,h:1,d:1, x:0,y:0, ns:1,b:color0});
     
     W.group({n:"G2",ry:0});
-    W.cube({g:"G2",x:0,y:0,ns:1,b:color0});
+    W.cube({g:"G2", w:1.5,h:1,d:1, x:0,y:0, ns:1,b:color0});
     range.addEventListener('input', this.inputListener);
     submit.addEventListener('click', this.submitListener);
   }
@@ -56,7 +57,12 @@ class Level1 implements State {
       this.frameG2 += 360;
     }
     W.move({n:"G2",ry:this.frameG2});
-    this.calculatePower();
+    
+    this.counter++;
+    if (this.counter > 20) {
+      this.counter = 0;
+      this.calculatePower();
+    }
   }
 
   updateRange(event: Event) {
@@ -68,15 +74,18 @@ class Level1 implements State {
     document.removeEventListener('submit', this.inputListener);
     submit.classList.add('clicked');
     setTimeout(() => {
-      gameStateMachine.setState(resultState);
+      gameStateMachine.setState(newResultState(results.great));
     }, 500);
   }
 
   calculatePower() {
-    const speedDifference = 1 - Math.abs(this.targetSpeed - this.speed) / 100;
-    const phaseDifference = 1 - Math.abs(this.frameG1 - this.frameG2) / 360;
+    const speedDifference = 1 - Math.abs(this.targetSpeed - this.speed);
+    const phaseDifference = 1 - Math.abs((this.frameG1 % 180) - (this.frameG2 % 180)) / 180;
+    
+    // Exagerate the error
+    const value = Math.pow((speedDifference * phaseDifference), 5);
 
-    const totalLedsOn = Math.round(5 * (speedDifference * phaseDifference));
+    const totalLedsOn = Math.round(5 * value);
 
     for (let index = 0; index < 5; index++) {
       lights.children[index].classList.toggle('on', totalLedsOn >= index+1);

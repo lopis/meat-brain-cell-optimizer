@@ -1,6 +1,6 @@
 :root {
   --color-0: #ecfffb;
-  --color-1: #05b38d;
+  --color-1: #e4c200;
   --color-2: #c330b2;
   --color-3: #6e0067;
   --color-4: #3300c0;
@@ -12,12 +12,6 @@
   height: 100vmin;
   width: 100vmin;
   image-rendering: pixelated; /* You definitely want this if you are doing pixel art */
-}
-
-#menu, #intro {
-  height: 100%;
-  width: 100%;
-  position: absolute;
 }
 
 /* Get rid of any margins, set background var(--color-5), use flexbox to center */
@@ -32,18 +26,33 @@ html, body {
   width: 100%;
   color: var(--color-0);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 6vmin;
 }
 
 h1 {
 	text-shadow: 5px 5px var(--color-2), 10px 10px var(--color-3), 15px 15px var(--color-4);
-	font-size: 300%;
+	font-size: 2em;
+  animation: shadow linear 800ms infinite;
+}
+
+@keyframes shadow {
+  from {
+	  text-shadow: 0px 0px var(--color-0), 2px 2px var(--color-2), 7px 7px var(--color-3), 14px 14px 1px var(--color-4);
+  }
+
+  to {
+	  text-shadow: 2px 2px var(--color-2), 7px 7px var(--color-3), 14px 14px 1px var(--color-4), 21px 21px 5px var(--color-5);
+  }
 }
 
 .hide {
   display: none !important;
 }
 
-#menu, #intro {
+#menu, #intro, #result {
+  height: 100%;
+  width: 100%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,24 +66,42 @@ ul {
   list-style: none;
   padding: 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
 }
 
-li {
-  color: var(--color-5);
-  background-color: var(--color-0);
-  padding: 0.5em 1em;
-  margin: 0.5em;
-  user-select: none;
-  cursor: pointer;
-  font-variant-caps: small-caps;
+ul button {
+	--button-color: var(--color-2);
+	color: var(--color-5);
+	background-color: var(--color-0);
+	padding: 0.5em;
+	margin: 0.5em 0;
+	user-select: none;
+	cursor: pointer;
+	font-variant-caps: small-caps;
+	font-weight: bold;
+	font-size: 20px;
+	box-shadow: 5px 5px var(--button-color);
+	border: 3px solid var(--button-color);
+	transition: transform 100ms, box-shadow 100ms;
+	width: 100%;
+	display: inline-flex;
+  justify-content: center;
+	gap: 1em;
 }
 
-li:hover {
-  background-color: var(--color-1);
+ul button :last-child {
+  margin-left: auto;
 }
 
-li:active {
-  background-color: var(--color-2);
+ul button:active {
+  transform: translate(4px, 4px);
+	box-shadow: 1px 1px var(--button-color);
+}
+
+ul button:hover {
+  --button-color: var(--color-1);
 }
 
 #intro {
@@ -171,7 +198,7 @@ input[type=range]::-moz-range-thumb {
 	font-size: 30px;
 	font-weight: bold;
 	color: var(--color-5);
-  transition: all 200ms ease-in-out 50ms;
+  transition: all 100ms ease-in-out 50ms;
   flex-shrink: 0;
 }
 #submit.clicked {

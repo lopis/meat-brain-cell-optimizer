@@ -4,4 +4,5 @@ let c2d;
 let W, debug;
 let menu, start, contGame, fullscreen;
 let intro, play;
-let lights, controls, fps, range, submit,;
+let lights, controls, fps, range, submit;
+let result, resultTitle, resultText, nextLevel, retry;

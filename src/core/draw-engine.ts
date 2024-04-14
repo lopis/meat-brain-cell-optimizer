@@ -1,9 +1,10 @@
-export const color0 = '#ecfffb';
-export const color1 = '#05b38d';
-export const color2 = '#c330b2';
-export const color3 = '#6e0067';
-export const color4 = '#3300c0';
-export const color5 = '#070044';
+var bodyStyles = window.getComputedStyle(document.body);
+export const color0 = bodyStyles.getPropertyValue('--color-0');
+export const color1 = bodyStyles.getPropertyValue('--color-1');
+export const color2 = bodyStyles.getPropertyValue('--color-2');
+export const color3 = bodyStyles.getPropertyValue('--color-3');
+export const color4 = bodyStyles.getPropertyValue('--color-4');
+export const color5 = bodyStyles.getPropertyValue('--color-5');
 
 class DrawEngine {
 
