@@ -2,7 +2,6 @@ declare module '*.jpg';
 declare module '*.png';
 
 declare const c2d;
-declare const W;
 declare const fps: HTMLDivElement;
 declare const menu: HTMLDivElement;
 declare const intro: HTMLDivElement;

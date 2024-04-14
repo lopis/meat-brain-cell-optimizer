@@ -1,5 +1,5 @@
-import { State } from '@/core/state';
-import { gameStateMachine } from '@/game-state-machine';
+import { State } from '../core/state';
+import { gameStateMachine } from '../game-state-machine';
 import { level1 } from './levels/1';
 
 class GameState implements State {

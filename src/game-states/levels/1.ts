@@ -1,7 +1,10 @@
-import { color0, color4 } from '@/core/draw-engine';
-import { State } from '@/core/state';
+import { color0, color4 } from '../../core/draw-engine';
+import { State } from '../../core/state';
 import { newResultState, results } from '../result.state';
-import { gameStateMachine } from '@/game-state-machine';
+import { gameStateMachine } from '../../game-state-machine';
+
+// @ts-ignore
+import W from '../../lib/w.js';
 
 class Level1 implements State {
   frameG1 = 0;
