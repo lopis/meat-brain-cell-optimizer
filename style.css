@@ -176,3 +176,43 @@ input[type=range]::-moz-range-thumb {
   transform: translate(4px, 4px);
 	box-shadow: 1px 1px var(--color-5);
 }
+
+/* LIGHTS */
+#lights {
+  position: fixed;
+  top: 0;
+  display: flex;
+	transform: translateY(calc(-150% + 2vh));
+  transition: 500ms ease-in-out 100ms;
+  padding: 3vh;
+}
+#controls.slide + #lights {
+  transform: translateY(0);
+}
+
+.led {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  background: var(--color-5);
+  margin: 1vh;
+}
+.led::after {
+  content: "";
+  height: 6px;
+  width: 28px;
+  position: absolute;
+  background: var(--color-5);
+  bottom: -6px;
+  left: -4px;
+}
+.led::before {
+  content: "";
+  height: 10px;
+  width: 20px;
+  position: absolute;
+  background: var(--color-5);
+  top: -6px;
+  left: 0;
+  border-radius: 99px 99px 0 0;
+}
