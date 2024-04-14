@@ -1,10 +1,10 @@
 import { color0, color4 } from '@/core/draw-engine';
 import { State } from '@/core/state';
-import { newResultState, results } from '../result.state';
+import { newResultState, results } from '../result.state.js';
 import { gameStateMachine } from '@/game-state-machine';
 import W from '../../lib/w.js';
 
-class Level1 implements State {
+class TwoCubesLevel implements State {
   frameG1 = 0;
   frameG2 = 0;
   speed = -0.5;
@@ -94,4 +94,4 @@ class Level1 implements State {
   }
 }
 
-export const level1 = new Level1();
+export const twoCubesLevel = new TwoCubesLevel();

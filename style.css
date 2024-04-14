@@ -201,6 +201,7 @@ input[type=range]::-moz-range-thumb {
 	color: var(--color-5);
   transition: all 100ms ease-in-out 50ms;
   flex-shrink: 0;
+  cursor: pointer;
 }
 #submit.clicked {
   transform: translate(4px, 4px);
