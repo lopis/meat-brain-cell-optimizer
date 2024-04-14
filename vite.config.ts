@@ -72,7 +72,7 @@ async function applyClosure(js: string, chunk: any) {
   const closureCompiler = new ClosureCompiler({
     js: tmpobj.name,
     externs: 'externs.js',
-    compilation_level: 'ADVANCED',
+    compilation_level: 'SIMPLE',
     language_in: 'ECMASCRIPT_2021',
     language_out: 'ECMASCRIPT_2021',
   });
