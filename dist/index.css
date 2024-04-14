@@ -9,8 +9,9 @@
 
 #c2d {
   position: absolute;
-  height: 100vmin;
   width: 100vmin;
+  aspect-ratio: 1;
+  max-width: 600px;
   image-rendering: pixelated; /* You definitely want this if you are doing pixel art */
 }
 
