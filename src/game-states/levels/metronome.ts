@@ -66,8 +66,8 @@ class Metronome extends Level implements State {
   }
 
   calculatePower() {
-    const amplituceDifference = Math.abs(this.amplitudeG1 - this.amplitudeG2);
-    super.calculatePower(amplituceDifference / this.AMPLITUDE_RANGE);
+    const amplituceDifference = 1 - Math.abs(this.amplitudeG1 - this.amplitudeG2);
+    super.calculatePower(amplituceDifference);
   }
 
   submit() {

@@ -1,21 +1,21 @@
 import { colorWhite, color4, colorDark } from '@/core/draw-engine';
 import { State } from '@/core/state';
-import { newResultState } from '../result.state';
-import { gameStateMachine } from '@/game-state-machine';
 import W from '../../lib/w.js';
+import { Level } from '@/core/level';
 
-class TwoGearsLevel implements State {
+class TwoGearsLevel extends Level implements State {
   frameG1 = 0;
   frameG2 = 0;
   speed = -0.5;
   counter = 0;
-  totalLedsOn = 0;
+  score = 0;
   inputListener: (event: Event) => void;
   submitListener: () => void;
 
   targetSpeed = 1;
 
   constructor() {
+    super();
     this.inputListener = () => this.updateRange();
     this.submitListener = () => this.submit();
   }
@@ -23,7 +23,7 @@ class TwoGearsLevel implements State {
   onEnter() {
     controls.classList.add('slide');
     range.value = '50';
-    range.step = '5';
+    range.step = '10';
     this.updateRange();
 
     W.reset(c2d);
@@ -71,15 +71,12 @@ class TwoGearsLevel implements State {
 
   updateRange() {
     const value = parseInt(range.value) || 0;
-    this.speed = (value - 50) / 35;
+    this.speed = (value - 50) / 40;
   }
 
   submit() {  
     document.removeEventListener('submit', this.inputListener);
-    submit.classList.add('clicked');
-    setTimeout(() => {
-      gameStateMachine.setState(newResultState(this.totalLedsOn));
-    }, 500);
+    super.submit();
   }
 
   calculatePower() {
@@ -89,11 +86,7 @@ class TwoGearsLevel implements State {
     // Exagerate the error
     const value = Math.pow((speedDifference * phaseDifference), 5);
 
-    this.totalLedsOn = Math.round(5 * value);
-
-    for (let index = 0; index < 5; index++) {
-      lights.children[index].classList.toggle('on', this.totalLedsOn >= index+1);
-    }
+    super.calculatePower(value);
   }
 }
 

@@ -23,7 +23,7 @@ export const results: Results = {
   great: {
     pass: true,
     title: 'Great job',
-    text: 'Your test results are very promising.'
+    text: 'These results are very promising.'
   },
   bad: {
     pass: false,
@@ -72,8 +72,6 @@ class ResultState implements State {
 const resultState = new ResultState();
 
 export const newResultState = (score: number) => {
-  console.log('score:', score);
-  
   const result = score > 5 ? results.perfect
     : score > 4 ? results.great
     : results.bad;
