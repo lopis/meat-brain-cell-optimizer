@@ -4,8 +4,8 @@ import { twoCubesLevel } from "@/game-states/levels/two-cubes";
 
 const levels = [
   metronome,
-  twoGearsLevel,
   twoCubesLevel,
+  twoGearsLevel,
 ];
 
 class GameData {
