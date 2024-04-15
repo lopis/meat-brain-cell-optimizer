@@ -1,3 +1,5 @@
+import { colorDark } from '@/core/draw-engine';
+import { gameData } from '@/core/game-data';
 import { State } from '@/core/state';
 import { gameStateMachine } from '@/game-state-machine';
 
@@ -34,23 +36,25 @@ class ResultState implements State {
   title = '';
   text = '';
   pass = true;
-  nextLevel: State | null = null;
-  previousLevel: State | null = null;
 
   constructor() {
     nextLevel.addEventListener('click', () => {
-      if(this.nextLevel) {
-        gameStateMachine.setState(this.nextLevel);
+      const nextLevel = gameData.nextLevel();
+      if(nextLevel) {
+        gameData.level++;
+        gameStateMachine.setState(nextLevel);
       }
     });
     retry.addEventListener('click', () => {
-      if(this.previousLevel) {
-        gameStateMachine.setState(this.previousLevel);
+      const prevLevel = gameData.getLevel();
+      if(prevLevel) {
+        gameStateMachine.setState(prevLevel);
       }
     });
   }
 
   onEnter() {
+    document.body.style.background = colorDark;
     resultTitle.innerText = this.title;
     resultText.innerText = this.text;
     result.classList.remove('hide');
@@ -67,12 +71,16 @@ class ResultState implements State {
 
 const resultState = new ResultState();
 
-export const newResultState = (result: Result, nextLevel: State | null = null, previousLevel: State | null = null) => {
+export const newResultState = (score: number) => {
+  console.log('score:', score);
+  
+  const result = score > 5 ? results.perfect
+    : score > 4 ? results.great
+    : results.bad;
+
   resultState.title = result.title;
   resultState.text = result.text;
   resultState.pass = result.pass;
-  resultState.nextLevel = nextLevel;
-  resultState.previousLevel = previousLevel;
   
   return resultState;
 };

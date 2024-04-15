@@ -1,10 +1,10 @@
 import { State } from '@/core/state';
 import { gameStateMachine } from '@/game-state-machine';
-import { metronome } from './levels/metronome';
+import { gameData } from '@/core/game-data';
 
 class GameState implements State {
   onEnter() {
-    gameStateMachine.setState(metronome);
+    gameStateMachine.setState(gameData.getLevel());
   }
 
   onUpdate() {

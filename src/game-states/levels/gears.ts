@@ -1,10 +1,10 @@
-import { colorWhite, color6 } from '@/core/draw-engine';
+import { colorWhite, color4, colorDark } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import { newResultState } from '../result.state';
 import { gameStateMachine } from '@/game-state-machine';
 import W from '../../lib/w.js';
 
-class TwoCubesLevel implements State {
+class TwoGearsLevel implements State {
   frameG1 = 0;
   frameG2 = 0;
   speed = -0.5;
@@ -16,23 +16,27 @@ class TwoCubesLevel implements State {
   targetSpeed = 1;
 
   constructor() {
-    this.inputListener = (event) => this.updateRange(event);
+    this.inputListener = () => this.updateRange();
     this.submitListener = () => this.submit();
   }
 
   onEnter() {
     controls.classList.add('slide');
-    range.value = '25';
+    range.value = '50';
+    range.step = '5';
+    this.updateRange();
 
     W.reset(c2d);
     W.camera({y:0.5,z:7, rx:-7, fov: 10});
-    document.body.style.background = color6;
+    W.light({x:1,y:-5,z:-1});
+    W.ambient(0.5);
+    document.body.style.background = color4;
 
     W.group({n:"G1",ry:0});
-    W.cube({g:"G1", w:1.5,h:1,d:1, x:0,y:0, ns:1,b:colorWhite});
+    W.cube({g:"G1", w:0.5,h:1,d:1, x:-0.25,y:0, b:colorDark});
     
     W.group({n:"G2",ry:0});
-    W.cube({g:"G2", w:1.5,h:1,d:1, x:0,y:0, ns:1,b:colorWhite});
+    W.cube({g:"G2", w:0.5,h:1,d:1, x:0.25,y:0, b:colorWhite});
     range.addEventListener('input', this.inputListener);
     submit.addEventListener('click', this.submitListener);
   }
@@ -48,7 +52,7 @@ class TwoCubesLevel implements State {
     if (this.frameG1 > 360) {
       this.frameG1 -= 360;
     }
-    W.move({n:"G1",ry:this.frameG1});
+    W.move({n:"G1",rx:this.frameG1,ry:45});
 
     this.frameG2 += this.speed;
     if (this.frameG2 > 360) {
@@ -56,7 +60,7 @@ class TwoCubesLevel implements State {
     } else if (this.frameG2 < 0) {
       this.frameG2 += 360;
     }
-    W.move({n:"G2",ry:this.frameG2});
+    W.move({n:"G2",rx:this.frameG2,ry:45});
     
     this.counter++;
     if (this.counter > 20) {
@@ -65,9 +69,9 @@ class TwoCubesLevel implements State {
     }
   }
 
-  updateRange(event: Event) {
-    // @ts-ignore
-    this.speed = 2 * (event?.target?.value - 50) / 100;
+  updateRange() {
+    const value = parseInt(range.value) || 0;
+    this.speed = (value - 50) / 35;
   }
 
   submit() {  
@@ -80,7 +84,7 @@ class TwoCubesLevel implements State {
 
   calculatePower() {
     const speedDifference = 1 - Math.abs(this.targetSpeed - this.speed);
-    const phaseDifference = 1 - Math.abs((this.frameG1 % 180) - (this.frameG2 % 180)) / 180;
+    const phaseDifference = 1 - Math.abs((this.frameG1 % 90) - (this.frameG2 % 90)) / 90;
     
     // Exagerate the error
     const value = Math.pow((speedDifference * phaseDifference), 5);
@@ -93,4 +97,4 @@ class TwoCubesLevel implements State {
   }
 }
 
-export const twoCubesLevel = new TwoCubesLevel();
+export const twoGearsLevel = new TwoGearsLevel();

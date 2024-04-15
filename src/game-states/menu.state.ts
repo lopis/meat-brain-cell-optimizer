@@ -1,6 +1,7 @@
 import { State } from '@/core/state';
 import { controls } from '@/core/controls';
 import { gameStateMachine } from '@/game-state-machine';
+import { twoGearsLevel } from './levels/gears';
 import { introState } from './intro.state';
 
 class MenuState implements State {

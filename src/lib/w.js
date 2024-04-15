@@ -109,11 +109,11 @@ const W = {
     if(debug) console.log('program:', W.gl.getProgramInfoLog(W.program) || 'OK');
     
     // Set the scene's background color (RGBA)
-    W.gl.clearColor(1, 1, 1, 1);
+    // W.gl.clearColor(1, 1, 1, 1);
     
     // Shortcut to set the clear color
-    W.clearColor = c => W.gl.clearColor(...W.col(c));
-    W.clearColor("fff");
+    // W.clearColor = c => W.gl.clearColor(...W.col(c));
+    // W.clearColor("fff");
     
     // Enable fragments depth sorting
     // (the fragments of close objects will automatically overlap the fragments of further objects)

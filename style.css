@@ -1,10 +1,12 @@
 :root {
-  --color-0: #ecfffb;
-  --color-1: #e4c200;
-  --color-2: #c330b2;
-  --color-3: #6e0067;
-  --color-4: #3300c0;
-  --color-5: #070044;
+  --color-white: #e7d9ff;
+  --color-1: #e6c300;
+  --color-2: #c431b3;
+  --color-3: #5c05e8;
+  --color-4: hsl(310, 100%, 23%);
+  --color-5: hsl(280, 100%, 23%);;
+  --color-6: hsl(250, 100%, 26%);
+  --color-dark: #070044;
 }
 
 #c2d {
@@ -15,34 +17,34 @@
   image-rendering: pixelated; /* You definitely want this if you are doing pixel art */
 }
 
-/* Get rid of any margins, set background var(--color-5), use flexbox to center */
+/* Get rid of any margins, set background var(--color-dark), use flexbox to center */
 html, body {
   user-select: none;
   margin: 0;
-  background-color: var(--color-5);
+  background-color: var(--color-dark);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  color: var(--color-0);
+  color: var(--color-white);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
 }
 
 h1 {
-	text-shadow: 5px 5px var(--color-2), 10px 10px var(--color-3), 15px 15px var(--color-4);
+	text-shadow: 5px 5px var(--color-2), 10px 10px var(--color-3), 15px 15px var(--color-6);
 	font-size: 2em;
   animation: shadow linear 800ms infinite;
 }
 
 @keyframes shadow {
   from {
-	  text-shadow: 0px 0px var(--color-0), 2px 2px var(--color-2), 7px 7px var(--color-3), 14px 14px 1px var(--color-4);
+	  text-shadow: 0px 0px var(--color-white), 2px 2px var(--color-2), 7px 7px var(--color-3), 14px 14px 1px var(--color-6);
   }
 
   to {
-	  text-shadow: 2px 2px var(--color-2), 7px 7px var(--color-3), 14px 14px 1px var(--color-4), 21px 21px 5px var(--color-5);
+	  text-shadow: 2px 2px var(--color-2), 7px 7px var(--color-3), 14px 14px 1px var(--color-6), 21px 21px 5px var(--color-dark);
   }
 }
 
@@ -74,8 +76,8 @@ ul {
 
 ul button {
 	--button-color: var(--color-2);
-	color: var(--color-5);
-	background-color: var(--color-0);
+	color: var(--color-dark);
+	background-color: var(--color-white);
 	padding: 0.5em;
 	margin: 0.5em 0;
 	user-select: none;
@@ -106,7 +108,15 @@ ul button:hover {
 }
 
 #intro {
-	max-width: 40ch;
+	max-width: 50ch;
+}
+.text {
+	text-align: left;
+	text-indent: 1em;
+  line-height: 1.4;
+}
+b {
+  color: var(--color-1);
 }
 
 #controls {
@@ -151,7 +161,7 @@ input[type=range]::-webkit-slider-runnable-track {
   box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   background: var(--color-2);
   border-radius: 25px;
-  border: 5px solid var(--color-5);
+  border: 5px solid var(--color-dark);
 }
 input[type=range]::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
@@ -159,7 +169,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 40px;
   width: 40px;
   border-radius: 40px;
-  background: var(--color-5);
+  background: var(--color-dark);
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -12.5px;
@@ -174,7 +184,7 @@ input[type=range]::-moz-range-track {
   box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
   background: var(--color-2);
   border-radius: 25px;
-  border: 5px solid var(--color-5);
+  border: 5px solid var(--color-dark);
 }
 input[type=range]::-moz-range-thumb {
   box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
@@ -182,7 +192,7 @@ input[type=range]::-moz-range-thumb {
   height: 40px;
   width: 40px;
   border-radius: 40px;
-  background: var(--color-5);
+  background: var(--color-dark);
   cursor: pointer;
 }
 
@@ -194,18 +204,18 @@ input[type=range]::-moz-range-thumb {
 	height: 100px;
 	width: 100px;
 	background: var(--color-1);
-	border: 3px solid var(--color-5);
-	box-shadow: 5px 5px var(--color-5);
+	border: 3px solid var(--color-dark);
+	box-shadow: 5px 5px var(--color-dark);
 	font-size: 30px;
 	font-weight: bold;
-	color: var(--color-5);
+	color: var(--color-dark);
   transition: all 100ms ease-in-out 50ms;
   flex-shrink: 0;
   cursor: pointer;
 }
 #submit.clicked {
   transform: translate(4px, 4px);
-	box-shadow: 1px 1px var(--color-5);
+	box-shadow: 1px 1px var(--color-dark);
 }
 
 /* LIGHTS */
@@ -222,7 +232,7 @@ input[type=range]::-moz-range-thumb {
 }
 
 .led {
-  --color-lights: var(--color-5);
+  --color-lights: var(--color-dark);
   position: relative;
   height: 15px;
   width: 20px;
@@ -249,5 +259,5 @@ input[type=range]::-moz-range-thumb {
   border-radius: 99px 99px 0 0;
 }
 .led.on {
-  --color-lights: var(--color-0);
+  --color-lights: var(--color-white);
 }
