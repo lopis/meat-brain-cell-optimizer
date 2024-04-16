@@ -73,7 +73,7 @@ const resultState = new ResultState();
 
 export const newResultState = (score: number) => {
   const result = score > 5 ? results.perfect
-    : score > 4 ? results.great
+    : score > 4.5 ? results.great
     : results.bad;
 
   resultState.title = result.title;

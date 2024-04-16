@@ -1,20 +1,21 @@
-import { color5, color6, colorWhite } from '@/core/draw-engine';
+import { color4, colorDark, colorWhite } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import W from '../../lib/w.js';
 import { Level } from '@/core/level.js';
 
-const HEIGHT = 0.1;
+const HEIGHT = 0.15;
 
 class HelixLevel extends Level implements State {
-  numObjects = 60; // Number of objects to draw in the circle
+  numObjects = 50; // Number of objects to draw in the circle
   radius = 1;
   maxFrames = 600;
 
   frame = 0;
-  amplitudeG1 = 1;
-  amplitudeG2 = 0;
   counter = 0;
-  score = 0;
+
+  radiusOffset = 0;
+  expectedValue = 0.8;
+
   inputListener: (event: Event) => void;
   submitListener: () => void;
 
@@ -30,15 +31,15 @@ class HelixLevel extends Level implements State {
     this.updateRange();
 
     W.reset(c2d);
-    W.camera({y:5,z:5, rx:-45, fov: 10});
+    W.camera({y:1,z:1.7, rx:-45, fov: 38});
     W.light({x:0,y:-1,z:0});
     W.ambient(0.8);
-    document.body.style.background = color6;
+    document.body.style.background = color4;
 
     for (let i = 0; i < this.numObjects; i++) {
       W.group({n:`GG${i}`});
       W.group({g:`GG${i}`, n:`G${i}`});
-      W.pyramid({g:`G${i}`, n:`P${i}`, w:0.1,h:HEIGHT,d:0.1, b:i%2?color5:colorWhite});
+      W.pyramid({g:`G${i}`, n:`P${i}`, w:0.1,h:HEIGHT,d:0.1, b:i%2?colorDark:colorWhite});
     }
 
     range.addEventListener('input', this.inputListener);
@@ -65,7 +66,7 @@ class HelixLevel extends Level implements State {
         W.move({n:`P${i}`, y:HEIGHT/2});
 
         W.move({n:`GG${i+1}`, ry: angleDeg});
-        W.move({n:`G${i+1}`, rx: fastAngle+180, z: this.radius});
+        W.move({n:`G${i+1}`, rx: fastAngle+180, z: this.radius - this.radiusOffset});
         W.move({n:`P${i+1}`, y:HEIGHT/2});
     }
   }
@@ -76,14 +77,22 @@ class HelixLevel extends Level implements State {
       this.frame = 0;
     }
     this.updateObjects();
-    this.calculatePower();
+
+    this.counter++;
+    if (this.counter > 20) {
+      this.counter = 0;
+      this.calculatePower();
+    }
   }
 
   updateRange() {
+    this.radiusOffset = this.expectedValue - (parseInt(range.value) / 100);
   }
 
   calculatePower() {
-    super.calculatePower(1);
+    const value = Math.pow(1 - Math.abs(this.radiusOffset), 5);
+    debugger;
+    super.calculatePower(value);
   }
 
   submit() {
