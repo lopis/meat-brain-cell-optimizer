@@ -36,7 +36,6 @@ module.exports = {
     'id-denylist': [
       'warn', 'seed', 'direction', 'clone', 'normalize', 'setAttribute', 'done', 'all', 'translate', 'scale', 'rotate',
       'position', 'rotation', 'children', 'parent', 'remove', 'setRotation', 'textureRepeat', 'load', 'image',
-      'width', 'height',
     ],
     'unused-imports/no-unused-vars': [
       'warn',

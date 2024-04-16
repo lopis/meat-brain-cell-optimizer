@@ -1,3 +1,5 @@
+import { CircleRange } from "./circle-range";
+
 const enum XboxControllerButton {
   A,
   B,
@@ -70,3 +72,4 @@ class Controls {
 }
 
 export const controls = new Controls();
+export const circleRange = new CircleRange(document.getElementById('circleRangeElement') as HTMLElement);
