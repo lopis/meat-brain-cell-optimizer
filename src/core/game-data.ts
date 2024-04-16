@@ -1,9 +1,11 @@
 import { twoGearsLevel } from "@/game-states/levels/gears";
-import { metronome } from "@/game-states/levels/metronome";
+import { helixLevel } from "@/game-states/levels/helix";
+import { metronomeLevel } from "@/game-states/levels/metronome";
 import { twoCubesLevel } from "@/game-states/levels/two-cubes";
 
 const levels = [
-  metronome,
+  helixLevel,
+  metronomeLevel,
   twoCubesLevel,
   twoGearsLevel,
 ];

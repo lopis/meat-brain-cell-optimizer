@@ -3,7 +3,7 @@ import { State } from '@/core/state';
 import W from '../../lib/w.js';
 import { Level } from '@/core/level.js';
 
-class Metronome extends Level implements State {
+class MetronomeLevel extends Level implements State {
   MAX_FRAMES = 60;
   AMPLITUDE_RANGE = 1.5;
 
@@ -76,4 +76,4 @@ class Metronome extends Level implements State {
   }
 }
 
-export const metronome = new Metronome();
+export const metronomeLevel = new MetronomeLevel();
