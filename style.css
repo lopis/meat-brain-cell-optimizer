@@ -293,12 +293,12 @@ input[type=range]::-moz-range-thumb {
 }
 
 .led {
-  --color-lights: var(--color-dark);
+  --color-lights: #ffffff55;
   position: relative;
   height: 15px;
   width: 20px;
   background: var(--color-lights);
-  margin: 1vh;
+  margin: 15px;
 }
 .led::after {
   content: "";
@@ -321,4 +321,30 @@ input[type=range]::-moz-range-thumb {
 }
 .led.on {
   --color-lights: var(--color-white);
+}
+.led.on, .led.on::before, .led.on::after {
+  box-shadow: 0 0 5px 1px var(--color-white);
+}
+i {
+  display: block;
+  position: relative;
+  top: 20px;
+}
+i::before, i::after {
+  content: "";
+  position: absolute;
+  height: 30px;
+  width: 20px;
+  border: solid var(--color-dark);
+  border-width: 0 4px 4px 0;
+  display: inline-block;
+}
+i::before {
+  left: -18px;
+  border-radius: 0 0 15px 0;
+}
+i::after {
+  right: -18px;
+  border-width: 0 0 4px 4px;
+  border-radius: 0 0 0 15px;
 }

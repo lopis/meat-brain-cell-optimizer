@@ -8,6 +8,12 @@ export const color5 = bodyStyles.getPropertyValue('--color-5');
 export const color6 = bodyStyles.getPropertyValue('--color-6');
 export const colorDark = bodyStyles.getPropertyValue('--color-dark');
 
+function renderLeds() {
+  for (let index = 0; index < 5; index++) {
+    lights.innerHTML += '<div class="led"><i/></div>';
+  }
+}
+
 class DrawEngine {
 
   constructor() {
@@ -20,6 +26,8 @@ class DrawEngine {
 
     window.addEventListener('resize', resize);
     resize();
+
+    renderLeds();
   }
 
 }
