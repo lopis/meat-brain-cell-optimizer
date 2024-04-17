@@ -138,6 +138,7 @@ b {
 	transform: translateY(calc(100% + 2vh));
   transition: 500ms ease-in-out 100ms;
   gap: 4vh;
+  flex-wrap: wrap;
 }
 #controls.slide {
 	transform: translateY(0);
