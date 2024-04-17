@@ -2,19 +2,22 @@ import { color4, colorDark, colorWhite } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import W from '../../lib/w.js';
 import { Level } from '@/core/level.js';
+import { circleRange } from '@/core/controls.js';
 
 const HEIGHT = 0.15;
 
 class HelixLevel extends Level implements State {
   numObjects = 50; // Number of objects to draw in the circle
   radius = 1;
-  maxFrames = 600;
+  maxFrames = 1200;
 
   frame = 0;
   counter = 0;
 
   radiusOffset = 0;
-  expectedValue = 0.8;
+  objectArc = 360 / this.numObjects;
+  expectedRadius = 0.8;
+  expectedAngle = 360 / this.numObjects;
 
   inputListener: (event: Event) => void;
   submitListener: () => void;
@@ -29,6 +32,7 @@ class HelixLevel extends Level implements State {
     controls.classList.add('slide');
     range.value = '0';
     this.updateRange();
+    circleRange.toggle(true);
 
     W.reset(c2d);
     W.camera({y:1,z:1.7, rx:-45, fov: 38});
@@ -47,7 +51,6 @@ class HelixLevel extends Level implements State {
   }
 
   onLeave() {
-    W.reset(c2d);
     document.removeEventListener('input', this.inputListener);
     controls.classList.remove('slide');
   }
@@ -65,7 +68,7 @@ class HelixLevel extends Level implements State {
         W.move({n:`G${i}`, rx: fastAngle, z: this.radius});
         W.move({n:`P${i}`, y:HEIGHT/2});
 
-        W.move({n:`GG${i+1}`, ry: angleDeg});
+        W.move({n:`GG${i+1}`, ry: angleDeg + circleRange.getValue() - this.expectedAngle});
         W.move({n:`G${i+1}`, rx: fastAngle+180, z: this.radius - this.radiusOffset});
         W.move({n:`P${i+1}`, y:HEIGHT/2});
     }
@@ -86,12 +89,13 @@ class HelixLevel extends Level implements State {
   }
 
   updateRange() {
-    this.radiusOffset = this.expectedValue - (parseInt(range.value) / 100);
+    this.radiusOffset = this.expectedRadius - (parseInt(range.value) / 100);
   }
 
   calculatePower() {
-    const value = Math.pow(1 - Math.abs(this.radiusOffset), 5);
-    debugger;
+    const radius = 1 - Math.abs(this.radiusOffset);
+    const angle = Math.max(0, 1 - Math.abs(this.expectedAngle - circleRange.getValue()));
+    const value = (angle + radius) / 2;
     super.calculatePower(value);
   }
 

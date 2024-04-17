@@ -1,9 +1,12 @@
+const TAU = Math.PI * 2;
+
 export class CircleRange {
-  pos = 0;
+  turns = 0;
+  value = 0;
   previousAngle = 0;
   prevPos = {x:0, y:0};
 
-  ringSize: number;
+  ringSize = 0;
   input: HTMLElement;
   ring: HTMLElement;
   thumb: HTMLElement;
@@ -16,7 +19,6 @@ export class CircleRange {
     this.input = circleRange;
     this.ring = this.input.children[0] as HTMLElement;
     this.thumb = this.ring.children[0] as HTMLElement;
-    this.ringSize = circleRange.children[0].clientHeight + 15;
   }
 
   dragStart(event: PointerEvent) {
@@ -32,8 +34,14 @@ export class CircleRange {
     const angle = this.calculateCircleAngle(event.x, event.y);
     const delta = this.previousAngle - angle;
     this.previousAngle = angle;
-    this.pos -= Math.min(15, delta);
-    const {x,y} = this.angleToPos(this.ringSize, this.pos);
+    if (delta >= Math.PI) {
+      this.turns++;
+    } else if (delta <= -Math.PI) {
+      this.turns--;
+    }
+    this.value -= Math.min(15, delta);
+    
+    const {x,y} = this.angleToPos(this.ringSize, this.value);
     this.thumb.style.transform = `translate(${x - this.ringSize}px, ${y - this.ringSize/2}px)`;
   }
 
@@ -64,5 +72,14 @@ export class CircleRange {
     const circleY = centerY + Math.sin(angle) * (squareSize / 2);
 
     return { x: circleX, y: circleY };
+  }
+
+  toggle(show: boolean) {
+    this.input.classList.toggle('hide', !show);
+    this.ringSize = this.input.children[0].clientHeight + 15;
+  }
+
+  getValue() {
+    return this.turns + this.value / TAU;
   }
 }

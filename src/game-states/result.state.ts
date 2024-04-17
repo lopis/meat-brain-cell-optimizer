@@ -2,6 +2,7 @@ import { colorDark } from '@/core/draw-engine';
 import { gameData } from '@/core/game-data';
 import { State } from '@/core/state';
 import { gameStateMachine } from '@/game-state-machine';
+import W from '@/lib/w';
 
 type Result = {
   title: string
@@ -54,6 +55,7 @@ class ResultState implements State {
   }
 
   onEnter() {
+    W.reset(c2d);
     document.body.style.background = colorDark;
     resultTitle.innerText = this.title;
     resultText.innerText = this.text;
