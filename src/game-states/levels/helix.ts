@@ -4,11 +4,12 @@ import W from '../../lib/w.js';
 import { Level } from '@/core/level.js';
 import { circleRange } from '@/core/controls.js';
 
-const HEIGHT = 0.15;
+const HEIGHT = 0.3;
+const WIDTH = 0.2;
 
 class HelixLevel extends Level implements State {
-  numObjects = 50; // Number of objects to draw in the circle
-  radius = 1;
+  numObjects = 12; // Number of objects to draw in the circle
+  radius = 0.9;
   maxFrames = 1200;
 
   frame = 0;
@@ -35,15 +36,13 @@ class HelixLevel extends Level implements State {
     circleRange.toggle(true);
 
     W.reset(c2d);
-    W.camera({y:1,z:1.7, rx:-45, fov: 38});
-    W.light({x:0,y:-1,z:0});
-    W.ambient(0.8);
+    W.camera({y:1,z:1.8, rx:-45, fov: 38});
     document.body.style.background = color4;
 
     for (let i = 0; i < this.numObjects; i++) {
       W.group({n:`GG${i}`});
       W.group({g:`GG${i}`, n:`G${i}`});
-      W.pyramid({g:`G${i}`, n:`P${i}`, w:0.1,h:HEIGHT,d:0.1, b:i%2?colorDark:colorWhite});
+      W.pyramid({g:`G${i}`, n:`P${i}`, ns:1, w:WIDTH,h:HEIGHT,d:WIDTH, b:i%2?colorDark:colorWhite});
     }
 
     range.addEventListener('input', this.inputListener);
