@@ -51,6 +51,7 @@ class HelixLevel extends Level implements State {
   }
 
   onLeave() {
+    circleRange.toggle(false);
     document.removeEventListener('input', this.inputListener);
     controls.classList.remove('slide');
   }

@@ -41,6 +41,10 @@ export class CircleRange {
     }
     this.value -= Math.min(15, delta);
     
+    this.updateThumb();
+  }
+
+  updateThumb() {
     const {x,y} = this.angleToPos(this.ringSize, this.value);
     this.thumb.style.transform = `translate(${x - this.ringSize}px, ${y - this.ringSize/2}px)`;
   }
@@ -75,6 +79,8 @@ export class CircleRange {
   }
 
   toggle(show: boolean) {
+    this.value = 0;
+    this.updateThumb();
     this.input.classList.toggle('hide', !show);
     this.ringSize = this.input.children[0].clientHeight + 15;
   }
