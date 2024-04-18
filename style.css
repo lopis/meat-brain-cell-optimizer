@@ -219,6 +219,7 @@ input[type=range]::-moz-range-thumb {
   flex-shrink: 0;
   padding: 20px;
   margin: -20px;
+  overscroll-behavior-block: none;
 }
 #ring {
   pointer-events: none;
