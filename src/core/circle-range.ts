@@ -31,7 +31,7 @@ export class CircleRange {
     document.removeEventListener('pointermove', this.inputHandler);
   }
 
-  moveThumb(event: PointerEvent) {
+  moveThumb(event: PointerEvent) {   
     const angle = this.calculateCircleAngle(event.x, event.y);
     const delta = this.previousAngle - angle;
     this.previousAngle = angle;
