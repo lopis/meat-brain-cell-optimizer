@@ -206,7 +206,11 @@ const W = {
   
   // Draw the scene
   draw: (now, dt, v, i, transparent = []) => {
-    
+    if (W.isDrawing) {
+      console.log('drop frame');
+      return;
+    };
+    W.isDrawing = true;
     // Loop and measure time delta between frames
     dt = now - W.lastFrame;
     W.lastFrame = now;
@@ -292,6 +296,8 @@ const W = {
       W.gl.getUniformLocation(W.program, 'light'),
       W.lerp('light','x'), W.lerp('light','y'), W.lerp('light','z')
     );
+
+    W.isDrawing = false;
   },
   
   // Render an object
