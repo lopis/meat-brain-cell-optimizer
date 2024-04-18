@@ -34,6 +34,7 @@ class HelixLevel extends Level implements State {
     range.value = '0';
     this.updateRange();
     circleRange.toggle(true);
+    circleRange.multiplier = 8;
 
     W.reset(c2d);
     W.camera({y:1,z:1.8, rx:-45, fov: 38});

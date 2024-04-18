@@ -5,6 +5,7 @@ export class CircleRange {
   value = 0;
   previousAngle = 0;
   prevPos = {x:0, y:0};
+  multiplier = 1;
 
   ringSize = 0;
   input: HTMLElement;
@@ -86,6 +87,6 @@ export class CircleRange {
   }
 
   getValue() {
-    return this.turns + this.value / TAU;
+    return this.multiplier * (this.turns + this.value / TAU);
   }
 }
