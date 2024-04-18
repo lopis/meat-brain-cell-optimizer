@@ -75,10 +75,10 @@ class HelixLevel extends Level implements State {
     }
   }
 
-  onUpdate() {
-    this.frame++;
-    if (this.frame === this.maxFrames) {
-      this.frame = 0;
+  onUpdate(delta: number) {
+    this.frame += delta / 16;
+    if (this.frame >= this.maxFrames) {
+      this.frame -= this.maxFrames;
     }
     this.updateObjects();
 
