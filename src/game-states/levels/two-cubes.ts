@@ -21,7 +21,6 @@ class TwoCubesLevel extends Level implements State {
   }
 
   onEnter() {
-    background(color6);
     range.value = '45';
 
     W.reset(c2d);

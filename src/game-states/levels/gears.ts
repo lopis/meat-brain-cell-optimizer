@@ -11,7 +11,6 @@ class TwoGearsLevel extends Level implements State {
   targetSpeed = 1;
 
   onEnter() {
-    background(color4);
     range.value = '50';
     range.step = '10';
 

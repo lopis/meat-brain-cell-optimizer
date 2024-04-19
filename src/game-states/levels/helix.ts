@@ -21,7 +21,6 @@ class HelixLevel extends Level implements State {
   expectedAngle = 360 / this.numObjects;
 
   onEnter() {
-    background(color4);
     range.value = '0';
     circleRange.toggle(true);
     circleRange.multiplier = 8;

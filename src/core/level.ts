@@ -1,6 +1,7 @@
 import { gameStateMachine } from "@/game-state-machine";
 import { newResultState } from "@/game-states/result.state";
 import { circleRange } from "./controls";
+import { background } from "./draw-engine";
 import { gameData } from "./game-data";
 
 function updateLeds(totalLedsOn: number) {
@@ -21,6 +22,7 @@ export class Level {
   }
 
   onEnter() {
+    background(gameData.color());
     range.addEventListener('input', this.inputListener);
     submit.addEventListener('click', this.submitListener);
     this.updateRange();

@@ -3,6 +3,7 @@ import { helixLevel } from "@/game-states/levels/helix";
 import { metronomeLevel } from "@/game-states/levels/metronome";
 import { cylinderLevel } from "@/game-states/levels/cylinder";
 import { twoCubesLevel } from "@/game-states/levels/two-cubes";
+import { color4, color5, color6 } from "./draw-engine";
 
 export const levels = [
   metronomeLevel,
@@ -10,6 +11,12 @@ export const levels = [
   helixLevel,
   twoGearsLevel,
   cylinderLevel,
+];
+
+export const levelColors = [
+  color6,
+  color5,
+  color4,
 ];
 
 function getStorage(): number {
@@ -47,6 +54,10 @@ class GameData {
     if (!level || level < this.level) {
       localStorage.setItem('meat_brain_cell_optimizer__level', `${this.level}`);
     }
+  }
+
+  color() {
+    return levelColors[this.level % levelColors.length];
   }
 }
 

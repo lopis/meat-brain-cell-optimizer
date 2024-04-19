@@ -2,11 +2,11 @@ import { State } from '@/core/state';
 import { controls } from '@/core/controls';
 import { gameStateMachine } from '@/game-state-machine';
 import { gameState } from './game.state';
-import { colorDark } from '@/core/draw-engine';
+import { background, colorDark } from '@/core/draw-engine';
 
 class IntroState implements State {
   onEnter() {
-    document.body.style.background = colorDark;
+    background(colorDark);
     intro.classList.remove('hide');
     play.addEventListener('click', this.startGame);
   }

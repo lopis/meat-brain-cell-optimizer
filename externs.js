@@ -5,4 +5,4 @@ menu, start, contGame, fullscreen,
 intro, play, lobby, list;
 lights, controls, fps, range, range2, submit,
 circleRangeElement, ring, thumb,
-result, resultTitle, resultText, nextLevel, retry;
+result, resultTitle, resultText, nextLevel, retry, thanks;

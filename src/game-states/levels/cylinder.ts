@@ -9,7 +9,6 @@ class CylinderLevel extends Level implements State {
   ry: number = 0;
 
   onEnter() {
-    background(color5);
     range.value = '75';
     range2.value = '95';
     range2.classList.remove('hide');

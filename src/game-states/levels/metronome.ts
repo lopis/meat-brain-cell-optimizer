@@ -14,7 +14,6 @@ class MetronomeLevel extends Level implements State {
   score = 0;
 
   onEnter() {
-    background(color6);
     range.value = '0';
 
     W.reset(c2d);
