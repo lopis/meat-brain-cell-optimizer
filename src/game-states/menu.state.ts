@@ -2,6 +2,8 @@ import { State } from '@/core/state';
 import { controls } from '@/core/controls';
 import { gameStateMachine } from '@/game-state-machine';
 import { introState } from './intro.state';
+import { levelListState } from './list';
+import { gameData } from '@/core/game-data';
 
 class MenuState implements State {
   private selectedButton = 0;
@@ -49,12 +51,17 @@ class MenuState implements State {
   }
 
   startGame() {
+    gameData.level = 0;
     setTimeout(() => {
       gameStateMachine.setState(introState);
     }, 100);
   }
 
-  continueGame() {}
+  continueGame() {
+    setTimeout(() => {
+      gameStateMachine.setState(levelListState);
+    }, 100);
+  }
 
   toggleFullscreen() {
     if (!document.fullscreenElement) {

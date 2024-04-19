@@ -43,6 +43,7 @@ class ResultState implements State {
       const nextLevel = gameData.nextLevel();
       if(nextLevel) {
         gameData.level++;
+        gameData.storeLevel();
         gameStateMachine.setState(nextLevel);
       }
     });

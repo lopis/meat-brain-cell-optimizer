@@ -1,7 +1,7 @@
 // WebGL framework
 // ===============
 
-const debug = 1; // Enable shader/program compilation logs (optional)
+const debug = 0; // Enable shader/program compilation logs (optional)
 
 const W = {
   

@@ -3,6 +3,8 @@ declare module '*.png';
 
 declare const c2d;
 declare const fps: HTMLDivElement;
+declare const lobby: HTMLDivElement;
+declare const list: HTMLUListElement;
 declare const menu: HTMLDivElement;
 declare const intro: HTMLDivElement;
 declare const start: HTMLLIElement;

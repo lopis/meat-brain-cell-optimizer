@@ -12,6 +12,7 @@ class CylinderLevel extends Level implements State {
     background(color5);
     range.value = '75';
     range2.value = '95';
+    range2.classList.remove('hide');
     overlay.classList.remove('hide');
 
     W.reset(c2d);
