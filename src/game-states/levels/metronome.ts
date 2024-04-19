@@ -1,4 +1,4 @@
-import { colorWhite, color6, colorDark } from '@/core/draw-engine';
+import { colorWhite, color6, colorDark, background } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import W from '../../lib/w.js';
 import { Level } from '@/core/level.js';
@@ -12,36 +12,20 @@ class MetronomeLevel extends Level implements State {
   amplitudeG2 = 0;
   counter = 0;
   score = 0;
-  inputListener: (event: Event) => void;
-  submitListener: () => void;
-
-  constructor() {
-    super();
-    this.inputListener = () => this.updateRange();
-    this.submitListener = () => this.submit();
-  }
 
   onEnter() {
-    controls.classList.add('slide');
+    background(color6);
     range.value = '0';
-    this.updateRange();
 
     W.reset(c2d);
     W.camera({y:0.5,z:7, rx:-7, fov: 10});
-    document.body.style.background = color6;
 
     W.group({n:"G1",ry:0});
     W.cube({g:"G1", w:0.1,h:1,d:0.1, x:0,y:0.5, ns:1,b:colorDark});
     
     W.group({n:"G2",ry:0});
     W.cube({g:"G2", w:0.1,h:1,d:0.1, x:0,y:0.5, ns:1,b:colorWhite});
-    range.addEventListener('input', this.inputListener);
-    submit.addEventListener('click', this.submitListener);
-  }
-
-  onLeave() {
-    document.removeEventListener('input', this.inputListener);
-    controls.classList.remove('slide');
+    super.onEnter();
   }
 
   onUpdate() {
@@ -60,18 +44,12 @@ class MetronomeLevel extends Level implements State {
   }
 
   updateRange() {
-    // @ts-ignore
-    this.amplitudeG2 = this.AMPLITUDE_RANGE * (range.value) / 100;
+    this.amplitudeG2 = this.AMPLITUDE_RANGE * (parseInt(range.value)) / 100;
   }
 
   calculatePower() {
     const amplituceDifference = 1 - Math.abs(this.amplitudeG1 - this.amplitudeG2);
     super.calculatePower(amplituceDifference);
-  }
-
-  submit() {
-    document.removeEventListener('submit', this.inputListener);
-    super.submit();
   }
 }
 

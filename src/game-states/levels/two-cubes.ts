@@ -1,4 +1,4 @@
-import { colorWhite, color6 } from '@/core/draw-engine';
+import { colorWhite, color6, background } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import W from '../../lib/w.js';
 import { Level } from '@/core/level';
@@ -21,23 +21,20 @@ class TwoCubesLevel extends Level implements State {
   }
 
   onEnter() {
-    controls.classList.add('slide');
+    background(color6);
     range.value = '45';
-    this.updateRange();
 
     W.reset(c2d);
     W.camera({y:4,z:7, rx:-30, fov: 10});
     W.light({x:0,y:-5,z:0});
     W.ambient(0.8);
-    document.body.style.background = color6;
 
     W.group({n:"G1",ry:0});
     W.cube({g:"G1", w:1.5,h:1,d:1, x:0,y:0,b:colorWhite});
     
     W.group({n:"G2",ry:0});
     W.cube({g:"G2", w:1.5,h:1,d:1, x:0,y:0,b:colorWhite});
-    range.addEventListener('input', this.inputListener);
-    submit.addEventListener('click', this.submitListener);
+    super.onEnter();
   }
 
   onLeave() {
@@ -70,11 +67,6 @@ class TwoCubesLevel extends Level implements State {
   updateRange() {
     // @ts-ignore
     this.speed = 2 * (range.value - 50) / 100;
-  }
-
-  submit() {  
-    document.removeEventListener('submit', this.inputListener);
-    super.submit();
   }
 
   calculatePower() {

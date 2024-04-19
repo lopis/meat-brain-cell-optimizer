@@ -1,4 +1,4 @@
-import { color4, colorDark, colorWhite } from '@/core/draw-engine';
+import { background, color4, colorDark, colorWhite } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import W from '../../lib/w.js';
 import { Level } from '@/core/level.js';
@@ -20,40 +20,21 @@ class HelixLevel extends Level implements State {
   expectedRadius = 0.8;
   expectedAngle = 360 / this.numObjects;
 
-  inputListener: (event: Event) => void;
-  submitListener: () => void;
-
-  constructor() {
-    super();
-    this.inputListener = () => this.updateRange();
-    this.submitListener = () => this.submit();
-  }
-
   onEnter() {
-    controls.classList.add('slide');
+    background(color4);
     range.value = '0';
-    this.updateRange();
     circleRange.toggle(true);
     circleRange.multiplier = 8;
 
     W.reset(c2d);
     W.camera({y:1,z:1.8, rx:-45, fov: 38});
-    document.body.style.background = color4;
 
     for (let i = 0; i < this.numObjects; i++) {
       W.group({n:`GG${i}`});
       W.group({g:`GG${i}`, n:`G${i}`});
       W.pyramid({g:`G${i}`, n:`P${i}`, ns:1, w:WIDTH,h:HEIGHT,d:WIDTH, b:i%2?colorDark:colorWhite});
     }
-
-    range.addEventListener('input', this.inputListener);
-    submit.addEventListener('click', this.submitListener);
-  }
-
-  onLeave() {
-    circleRange.toggle(false);
-    document.removeEventListener('input', this.inputListener);
-    controls.classList.remove('slide');
+    super.onEnter();
   }
 
   updateObjects() {
@@ -98,11 +79,6 @@ class HelixLevel extends Level implements State {
     const angle = Math.max(0, 1 - Math.abs(this.expectedAngle - circleRange.getValue()));
     const value = (angle + radius) / 2;
     super.calculatePower(value);
-  }
-
-  submit() {
-    document.removeEventListener('submit', this.inputListener);
-    super.submit();
   }
 }
 

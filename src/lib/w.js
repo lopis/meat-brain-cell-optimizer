@@ -630,7 +630,11 @@ W.add("pyramid", {
     aj = j * Math.PI / precision;
     for(i = 0; i <= precision; i++){
       ai = i * 2 * Math.PI / precision;
-      vertices.push(+(Math.sin(ai) * Math.sin(aj)/2).toFixed(6), +(Math.cos(aj)/2).toFixed(6), +(Math.cos(ai) * Math.sin(aj)/2).toFixed(6));
+      vertices.push(
+        +(Math.sin(ai) * Math.sin(aj)/2).toFixed(6),
+        +(Math.cos(aj)/2).toFixed(6),
+        +(Math.cos(ai) * Math.sin(aj)/2).toFixed(6)
+      );
       uv.push((Math.sin((i/precision))) * 3.5, -Math.sin(j/precision));
       if(i < precision && j < precision){
         indices.push(p1 = j * (precision + 1) + i, p2 = p1 + (precision + 1), (p1 + 1), (p1 + 1), p2, (p2 + 1));
@@ -638,6 +642,46 @@ W.add("pyramid", {
     }
   }
   W.add("sphere", {vertices, uv, indices});
+})();
+
+//
+// Cylinder
+//
+//     .-------.
+//    (         )
+//    |'-.....-'|
+//    |         |
+//    '.._____..'
+
+((i, ai, j, aj, p1, p2, vertices = [], indices = [], uv = [], precision = 20) => {
+  const maxRadius = 0.5;
+  const topY = precision * 0.2;
+  const bottomY = precision * 0.8;
+  for(j = 0; j <= precision; j++){
+    aj = j * Math.PI / precision;
+    const isTop = j <= topY;
+    const isBottom = j >= bottomY;
+    const radius = isTop ? maxRadius * (j/topY)
+      : isBottom ? 0
+      : maxRadius;
+
+    const y =  isTop ? maxRadius
+      : isBottom ? -maxRadius
+      : (((precision - j) / precision) - 0.5) * 2;
+    for(i = 0; i <= precision; i++){
+      ai = i * 2 * Math.PI / precision;
+      vertices.push(
+        +(Math.sin(ai) * radius).toFixed(6),
+        y,
+        +(Math.cos(ai) * radius).toFixed(6)
+      );
+      uv.push((Math.sin((i/precision))) * 3.5, -Math.sin(j/precision));
+      if(i < precision && j < precision){
+        indices.push(p1 = j * (precision + 1) + i, p2 = p1 + (precision + 1), (p1 + 1), (p1 + 1), p2, (p2 + 1));
+      }
+    }
+  }
+  W.add("cylinder", {vertices, uv, indices});
 })();
 
 export default W;

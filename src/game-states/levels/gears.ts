@@ -1,4 +1,4 @@
-import { colorWhite, color4, colorDark } from '@/core/draw-engine';
+import { colorWhite, color4, colorDark, background } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import W from '../../lib/w.js';
 import { Level } from '@/core/level';
@@ -8,42 +8,25 @@ class TwoGearsLevel extends Level implements State {
   frameG2 = 0;
   speed = -0.5;
   counter = 0;
-  score = 0;
-  inputListener: (event: Event) => void;
-  submitListener: () => void;
-
   targetSpeed = 1;
 
-  constructor() {
-    super();
-    this.inputListener = () => this.updateRange();
-    this.submitListener = () => this.submit();
-  }
-
   onEnter() {
-    controls.classList.add('slide');
+    background(color4);
     range.value = '50';
     range.step = '10';
-    this.updateRange();
 
     W.reset(c2d);
     W.camera({y:0.5,z:7, rx:-7, fov: 10});
     W.light({x:1,y:-5,z:-1});
     W.ambient(0.5);
-    document.body.style.background = color4;
 
     W.group({n:"G1",ry:0});
     W.cube({g:"G1", w:0.5,h:1,d:1, x:-0.25,y:0, b:colorDark});
     
     W.group({n:"G2",ry:0});
     W.cube({g:"G2", w:0.5,h:1,d:1, x:0.25,y:0, b:colorWhite});
-    range.addEventListener('input', this.inputListener);
-    submit.addEventListener('click', this.submitListener);
-  }
 
-  onLeave() {
-    document.removeEventListener('input', this.inputListener);
-    controls.classList.remove('slide');
+    super.onEnter();
   }
 
   onUpdate() {
@@ -71,11 +54,6 @@ class TwoGearsLevel extends Level implements State {
   updateRange() {
     const value = parseInt(range.value) || 0;
     this.speed = (value - 50) / 40;
-  }
-
-  submit() {  
-    document.removeEventListener('submit', this.inputListener);
-    super.submit();
   }
 
   calculatePower() {

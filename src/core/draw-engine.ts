@@ -14,8 +14,11 @@ function renderLeds() {
   }
 }
 
-class DrawEngine {
+export function background(color: string) {
+  document.body.style.background = color;
+}
 
+class DrawEngine {
   constructor() {
     const resize = () => {
       // eslint-disable-next-line id-denylist
@@ -29,7 +32,6 @@ class DrawEngine {
 
     renderLeds();
   }
-
 }
 
 export const drawEngine = new DrawEngine();

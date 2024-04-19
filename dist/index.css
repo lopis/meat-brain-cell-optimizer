@@ -97,7 +97,6 @@ ul button {
 	font-size: 20px;
 	box-shadow: 5px 5px var(--button-color);
 	border: 3px solid var(--button-color);
-	transition: transform 100ms, box-shadow 100ms;
 	width: 100%;
 	display: inline-flex;
   justify-content: center;
@@ -109,8 +108,18 @@ ul button :last-child {
 }
 
 ul button:active {
-  transform: translate(4px, 4px);
-	box-shadow: 1px 1px var(--button-color);
+  animation: click 100ms alternate;
+}
+
+@keyframes frames {
+  from {
+    transform: translate(0px, 0px);
+    box-shadow: 5px 5px var(--button-color);
+  }
+  to {
+    transform: translate(4px, 4px);
+    box-shadow: 1px 1px var(--button-color);
+  }
 }
 
 ul button:hover {
@@ -351,4 +360,20 @@ i::after {
   right: -18px;
   border-width: 0 0 4px 4px;
   border-radius: 0 0 0 15px;
+}
+
+
+/* OVERLAY */
+#overlay {
+	display: inline-flex;
+	border-radius: 999px;
+	mix-blend-mode: hue;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50vmin;
+	aspect-ratio: 1;
+	max-width: 300px;
+	background: currentColor;
 }
