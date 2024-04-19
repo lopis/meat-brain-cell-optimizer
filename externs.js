@@ -1,8 +1,26 @@
 /* eslint-disable unused-imports/no-unused-vars */
-let localStorage,
-c2d,
-menu, start, contGame, fullscreen,
-intro, play, lobby, list;
-lights, controls, fps, range, range2, submit,
-circleRangeElement, ring, thumb,
-result, resultTitle, resultText, nextLevel, retry, thanks;
+let c2d;
+let circleRangeElement;
+let contGame;
+let controls;
+let fps;
+let fullscreen;
+let intro;
+let list;
+let lights;
+let lobby;
+let localStorage;
+let menu;
+let nextLevel;
+let play;
+let range;
+let range2;
+let result;
+let resultText;
+let resultTitle;
+let retry;
+let ring;
+let start;
+let submit;
+let thanks; 
+let thumb;

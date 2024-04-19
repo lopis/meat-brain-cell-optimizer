@@ -51,10 +51,15 @@ html {
   transform: rotate(-30deg);
 }
 
-h1 {
+h1, h2 {
 	text-shadow: 5px 5px var(--color-2), 10px 10px var(--color-3), 15px 15px var(--color-6);
 	font-size: 2rem;
   animation: shadow linear 800ms infinite;
+  margin: 0.2rem;
+}
+h2 {
+  font-size: 1.3rem;
+  font-weight: normal;
 }
 
 @keyframes shadow {

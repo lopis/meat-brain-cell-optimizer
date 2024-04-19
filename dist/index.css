@@ -22,6 +22,7 @@ html, body {
   user-select: none;
   margin: 0;
   background-color: var(--color-dark);
+  transition: background-color 100ms ease;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,9 +30,17 @@ html, body {
   width: 100%;
   color: var(--color-white);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
   overscroll-behavior: none;
   touch-action: none;
+}
+
+html {
+  font-size: 20px;
+}
+@media (min-width: 960px) {
+  html {
+    font-size: 35px;
+  }
 }
 
 .bck {
@@ -44,7 +53,7 @@ html, body {
 
 h1 {
 	text-shadow: 5px 5px var(--color-2), 10px 10px var(--color-3), 15px 15px var(--color-6);
-	font-size: 2em;
+	font-size: 2rem;
   animation: shadow linear 800ms infinite;
 }
 
@@ -62,7 +71,7 @@ h1 {
   display: none !important;
 }
 
-#menu, #intro, #result {
+#menu, #intro, #result, #lobby {
   height: 100%;
   width: 100%;
   position: absolute;
@@ -73,6 +82,28 @@ h1 {
   text-align: center;
   padding: 2vmax;
   box-sizing: border-box;
+}
+
+#list {
+	flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2vh;
+  justify-content: center;
+}
+#list button {
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+button:disabled {
+	box-shadow: none;
+	opacity: 0.7;
+	border: none;
+  cursor: default;
 }
 
 ul {
@@ -94,7 +125,7 @@ ul button {
 	cursor: pointer;
 	font-variant-caps: small-caps;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 1em;
 	box-shadow: 5px 5px var(--button-color);
 	border: 3px solid var(--button-color);
 	width: 100%;
@@ -108,10 +139,10 @@ ul button :last-child {
 }
 
 ul button:active {
-  animation: click 100ms alternate;
+  animation: click 100ms;
 }
 
-@keyframes frames {
+@keyframes click {
   from {
     transform: translate(0px, 0px);
     box-shadow: 5px 5px var(--button-color);
@@ -124,6 +155,10 @@ ul button:active {
 
 ul button:hover {
   --button-color: var(--color-1);
+}
+
+#resultText {
+	max-width: 35ch;
 }
 
 #intro {
@@ -273,13 +308,14 @@ input[type=range]::-moz-range-thumb {
 
 /* BUTTON */
 #submit {
+  --button-color: var(--color-dark);
 	padding: 1vh;
 	border-radius: 999px;
 	height: 100px;
 	width: 100px;
 	background: var(--color-1);
-	border: 3px solid var(--color-dark);
-	box-shadow: 5px 5px var(--color-dark);
+	border: 3px solid var(--button-color);
+	box-shadow: 5px 5px var(--button-color);
 	font-size: 30px;
 	font-weight: bold;
 	color: var(--color-dark);
@@ -288,8 +324,7 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
 }
 #submit.clicked {
-  transform: translate(4px, 4px);
-	box-shadow: 1px 1px var(--color-dark);
+  animation: click 200ms;
 }
 
 /* LIGHTS */
@@ -298,7 +333,6 @@ input[type=range]::-moz-range-thumb {
   top: 0;
   display: flex;
 	transform: translateY(calc(-150% + 2vh));
-  transition: 500ms ease-in-out 100ms;
   padding: 3vh;
 }
 #controls.slide + #lights {
@@ -312,6 +346,7 @@ input[type=range]::-moz-range-thumb {
   width: 20px;
   background: var(--color-lights);
   margin: 15px;
+  box-shadow: 0 0 5px 1px transparent;
 }
 .led::after {
   content: "";
@@ -332,11 +367,15 @@ input[type=range]::-moz-range-thumb {
   left: 0;
   border-radius: 99px 99px 0 0;
 }
+.led, .led::before, .led::after {
+  transition: background 50ms ease-in-out, box-shadow 50ms ease-in-out;
+}
 .led.on {
   --color-lights: var(--color-white);
 }
 .led.on, .led.on::before, .led.on::after {
   box-shadow: 0 0 5px 1px var(--color-white);
+  transition: background 50ms ease-in-out 50ms, box-shadow 50ms ease-in-out 50ms;
 }
 i {
   display: block;
@@ -375,5 +414,5 @@ i::after {
 	width: 50vmin;
 	aspect-ratio: 1;
 	max-width: 300px;
-	background: currentColor;
+	background: var(--color-5);
 }
