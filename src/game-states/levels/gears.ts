@@ -1,4 +1,4 @@
-import { colorWhite, color4, colorDark, background } from '@/core/draw-engine';
+import { colorWhite, colorDark } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import W from '../../lib/w.js';
 import { Level } from '@/core/level';

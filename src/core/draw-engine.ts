@@ -14,6 +14,10 @@ function renderLeds() {
   }
 }
 
+export function easeInOutSine (x: number): number {
+  return -(Math.cos(Math.PI * x) - 1) / 2;
+};
+
 export function background(color: string) {
   document.body.style.background = color;
 }
