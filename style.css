@@ -108,10 +108,10 @@ ul button :last-child {
 }
 
 ul button:active {
-  animation: click 100ms alternate;
+  animation: click 100ms;
 }
 
-@keyframes frames {
+@keyframes click {
   from {
     transform: translate(0px, 0px);
     box-shadow: 5px 5px var(--button-color);
@@ -273,13 +273,14 @@ input[type=range]::-moz-range-thumb {
 
 /* BUTTON */
 #submit {
+  --button-color: var(--color-dark);
 	padding: 1vh;
 	border-radius: 999px;
 	height: 100px;
 	width: 100px;
 	background: var(--color-1);
-	border: 3px solid var(--color-dark);
-	box-shadow: 5px 5px var(--color-dark);
+	border: 3px solid var(--button-color);
+	box-shadow: 5px 5px var(--button-color);
 	font-size: 30px;
 	font-weight: bold;
 	color: var(--color-dark);
@@ -288,8 +289,7 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
 }
 #submit.clicked {
-  transform: translate(4px, 4px);
-	box-shadow: 1px 1px var(--color-dark);
+  animation: click 200ms;
 }
 
 /* LIGHTS */
@@ -298,7 +298,6 @@ input[type=range]::-moz-range-thumb {
   top: 0;
   display: flex;
 	transform: translateY(calc(-150% + 2vh));
-  transition: 500ms ease-in-out 100ms;
   padding: 3vh;
 }
 #controls.slide + #lights {
@@ -312,6 +311,7 @@ input[type=range]::-moz-range-thumb {
   width: 20px;
   background: var(--color-lights);
   margin: 15px;
+  box-shadow: 0 0 5px 1px transparent;
 }
 .led::after {
   content: "";
@@ -332,11 +332,15 @@ input[type=range]::-moz-range-thumb {
   left: 0;
   border-radius: 99px 99px 0 0;
 }
+.led, .led::before, .led::after {
+  transition: background 50ms ease-in-out, box-shadow 50ms ease-in-out;
+}
 .led.on {
   --color-lights: var(--color-white);
 }
 .led.on, .led.on::before, .led.on::after {
   box-shadow: 0 0 5px 1px var(--color-white);
+  transition: background 50ms ease-in-out 50ms, box-shadow 50ms ease-in-out 50ms;
 }
 i {
   display: block;
@@ -375,5 +379,5 @@ i::after {
 	width: 50vmin;
 	aspect-ratio: 1;
 	max-width: 300px;
-	background: currentColor;
+	background: var(--color-5);
 }

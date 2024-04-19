@@ -26,6 +26,8 @@ export class Level {
     range.removeEventListener('input', this.inputListener);
     submit.removeEventListener('click', this.submitListener);
     controls.classList.remove('slide');
+    overlay.classList.add('hide');
+    submit.classList.remove('clicked');
   }
 
   calculatePower(value: number) {

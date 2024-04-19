@@ -49,7 +49,9 @@ class MenuState implements State {
   }
 
   startGame() {
-    gameStateMachine.setState(introState);
+    setTimeout(() => {
+      gameStateMachine.setState(introState);
+    }, 100);
   }
 
   continueGame() {}

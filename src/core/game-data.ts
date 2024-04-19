@@ -5,11 +5,11 @@ import { cylinderLevel } from "@/game-states/levels/cylinder";
 import { twoCubesLevel } from "@/game-states/levels/two-cubes";
 
 const levels = [
-  cylinderLevel,
   twoGearsLevel,
   metronomeLevel,
   twoCubesLevel,
   helixLevel,
+  cylinderLevel,
 ];
 
 class GameData {
