@@ -7,12 +7,12 @@ import { color4, color5, color6 } from "./draw-engine";
 import { flyLevel } from "@/game-states/levels/fly";
 
 export const levels = [
-  flyLevel,
   metronomeLevel,
   twoCubesLevel,
   helixLevel,
   twoGearsLevel,
   cylinderLevel,
+  flyLevel,
 ];
 
 export const levelColors = [
