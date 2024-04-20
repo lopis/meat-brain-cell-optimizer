@@ -1,11 +1,13 @@
-import { color1 } from '@/core/draw-engine';
+import { color1, exponencialSmoothing } from '@/core/draw-engine';
 import { State } from '@/core/state';
 import W from '../../lib/w.js';
 import { Level } from '@/core/level.js';
 
 class CylinderLevel extends Level implements State {
   frame = 0;
+  targetRx: number = 0;
   rx: number = 0;
+  targetRy: number = 0;
   ry: number = 0;
 
   onEnter() {
@@ -24,24 +26,25 @@ class CylinderLevel extends Level implements State {
     super.onEnter();
   }
 
-  onUpdate() {
+  onUpdate(delta: number) {
     W.move({n:'G1', rz: this.frame++});
 
     const r1 = parseInt(range.value) - 10;
     const r2 = parseInt(range2.value) + 10;
 
-    this.rx = 90 - 90*r1 / 100;
-    this.ry = 90 - 90*r2 / 100;
+    this.targetRx = 90 - 90*r1 / 100;
+    this.targetRy = 90 - 90*r2 / 100;
+
+    this.rx = exponencialSmoothing(this.rx, this.targetRx, delta);
+    this.ry = exponencialSmoothing(this.ry, this.targetRy, delta);
+
     W.move({n:'C1', rx:this.rx,ry:this.ry});
     this.calculatePower();
   }
 
-  updateRange() {
-  }
-
   calculatePower() {
-    const value1 = 1 - 10 * Math.abs(90 - this.rx) / 360;
-    const value2 = 1 - 10 * Math.abs(this.ry) / 360;
+    const value1 = 1 - 10 * Math.abs(90 - this.targetRx) / 360;
+    const value2 = 1 - 10 * Math.abs(this.targetRy) / 360;
     super.calculatePower((value1 + value2) / 2);
   }
 }

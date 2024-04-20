@@ -1,7 +1,12 @@
 declare module '*.jpg';
 declare module '*.png';
 
-declare const c2d;
+declare const c2d: HTMLCanvasElement;
+declare const plane: SVGElement;
+declare const pl1: SVGPathElement;
+declare const pl2: SVGPathElement;
+declare const pl3: SVGPathElement;
+
 declare const fps: HTMLDivElement;
 declare const lobby: HTMLDivElement;
 declare const list: HTMLUListElement;
@@ -17,6 +22,9 @@ declare const controls: HTMLDivElement;
 declare const range: HTMLInputElement;
 declare const range2: HTMLInputElement;
 declare const submit: HTMLButtonElement;
+declare const circleRangeElement: HTMLDivElement;
+declare const circleRangeElement2: HTMLDivElement;
+
 
 declare const result: HTMLDivElement;
 declare const resultTitle: HTMLHeadElement;

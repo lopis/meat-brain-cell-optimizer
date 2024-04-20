@@ -36,6 +36,8 @@ export class Level {
     overlay.classList.add('hide');
     submit.classList.remove('clicked');
     circleRange.toggle(false);
+    range.step = '1';
+    range2.step = '1';
     updateLeds(0);
   }
 

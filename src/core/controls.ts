@@ -72,4 +72,5 @@ class Controls {
 }
 
 export const controls = new Controls();
-export const circleRange = new CircleRange(document.getElementById('circleRangeElement') as HTMLElement);
+export const circleRange = new CircleRange(circleRangeElement);
+export const circleRange2 = new CircleRange(circleRangeElement2);

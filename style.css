@@ -9,8 +9,8 @@
   --color-dark: #050031;
 }
 
-#c2d {
-  position: absolute;
+#c2d, #plane {
+  position: fixed;
   width: 100vmin;
   aspect-ratio: 1;
   max-width: 600px;
@@ -52,8 +52,7 @@ html {
 }
 
 h1, h2 {
-	text-shadow: 5px 5px var(--color-2), 10px 10px var(--color-3), 15px 15px var(--color-6);
-	font-size: 2rem;
+	font-size: 2.5rem;
   animation: shadow linear 800ms infinite;
   margin: 0.2rem;
 }
@@ -64,11 +63,17 @@ h2 {
 
 @keyframes shadow {
   from {
-	  text-shadow: 0px 0px var(--color-white), 2px 2px var(--color-2), 7px 7px var(--color-3), 14px 14px 1px var(--color-6);
+	  text-shadow: 0.00em 0.00em var(--color-white),
+                 0.05em 0.05em var(--color-2),
+                 0.10em 0.10em var(--color-3),
+                 0.20em 0.20em var(--color-6);
   }
 
   to {
-	  text-shadow: 2px 2px var(--color-2), 7px 7px var(--color-3), 14px 14px 1px var(--color-6), 21px 21px 5px var(--color-dark);
+	  text-shadow:  0.05em 0.05em var(--color-2),
+                  0.10em 0.10em var(--color-3),
+                  0.20em 0.20em var(--color-6),
+                  0.25em 0.25em transparent;
   }
 }
 
@@ -101,7 +106,8 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  padding: 0;
 }
 
 button:disabled {
@@ -262,7 +268,7 @@ input[type=range]::-moz-range-thumb {
 }
 
 /* CIRCLE RANGE */
-#circleRangeElement {
+.cre {
   --circle-rang-size: 150px;
   --range-width: 17px;
 
@@ -421,4 +427,38 @@ i::after {
 	aspect-ratio: 1;
 	max-width: 300px;
 	background: var(--color-5);
+}
+
+/* Plane */
+#plane {
+	display: flex;
+	place-content: center;
+  animation: bob 1s alternate infinite ease-in-out;
+}
+#plane svg {
+  animation: rotate 1s alternate infinite ease-in-out;
+  animation-delay: -0.5s;
+  position: relative;
+  left: -20%;
+}
+#plane path {
+  transform-origin: 72% 30%;
+  transition: transform 100ms ease-in-out;
+}
+
+@keyframes bob {
+  from {
+    transform: translate(-2%,-10%);
+  }
+  to {
+    transform: translate(2%,0%);
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(20deg);
+  }
+  to {
+    transform: rotate(30deg);
+  }
 }

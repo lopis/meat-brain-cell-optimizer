@@ -22,6 +22,10 @@ export function background(color: string) {
   document.body.style.background = color;
 }
 
+export function exponencialSmoothing(value: number, target: number, elapsedMilis: number, speed: number = 3) {
+  return value + (target - value) * (elapsedMilis * speed / 1000);
+}
+
 class DrawEngine {
   constructor() {
     const resize = () => {

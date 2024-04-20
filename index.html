@@ -13,6 +13,14 @@
 <body>
     <div class="bck"></div>
     <canvas id="c2d" width="1920" height="1080"></canvas>
+    <div id="plane" class="hide">
+        <svg viewBox="0 0 26.5 26.5">
+            <!-- transform: rotate(130deg); transform-origin: 72% 30%; -->
+            <path id="pl1" fill="#c431b3" d="M18.5 8.5 8 13.9l2 1.3Z"/>
+            <path id="pl3" fill="#750062" d="M11.3 17.9 10 15.2l8.5-6.7Z"/>
+            <path id="pl2" fill="#c431b3" d="m18.5 8.5-7.2 7.4 3.6 2z"/>
+        </svg>
+    </div>
     <div id="lobby" class="hide">
         <h1>
             Levels
@@ -73,13 +81,18 @@
         </ul>
     </div>
     <div id="controls">
-        <input id="range" type="range" min="0" max="100" step="5">
-        <input id="range2" class="hide" type="range" min="0" max="100" step="5">
-        <div id="circleRangeElement" class="hide">
+        <input id="range" type="range" min="0" max="100">
+        <input id="range2" class="hide" type="range" min="0" max="100">
+        <div id="circleRangeElement" class="cre hide">
             <div id="ring">
               <div id="thumb"></div>
             </div>
-          </div>
+        </div>
+        <div id="circleRangeElement2" class="cre hide">
+            <div id="ring">
+              <div id="thumb"></div>
+            </div>
+        </div>
         <button id="submit">OK</button>
     </div>
     <div id="lights"></div>
