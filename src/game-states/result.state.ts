@@ -24,7 +24,7 @@ export const results: Results = {
   },
   great: {
     pass: true,
-    title: 'Great job',
+    title: 'Good job',
     text: 'These results are very promising.'
   },
   bad: {
@@ -61,24 +61,23 @@ class ResultState implements State {
     background(colorDark);
     W.reset(c2d);
 
-    if (this.pass && gameData.nextLevel()) {
-      gameData.level++;
-      gameData.storeLevel();
-    }
-
     if (this.pass && !gameData.nextLevel()) {
       resultTitle.innerText = 'End of experiment';
       resultText.innerText = 'You have demonstrated promising results for your species. We will keep in touch.';
       result.classList.remove('hide');
       thanks.classList.remove('hide');
       nextLevel.classList.add('hide');
-      
     } else {
       resultTitle.innerText = this.title;
       resultText.innerText = this.text;
       thanks.classList.add('hide');
       result.classList.remove('hide');
       nextLevel.classList.toggle('hide', !this.pass);
+    }
+
+    if (this.pass && gameData.nextLevel()) {
+      gameData.level++;
+      gameData.storeLevel();
     }
   }
 

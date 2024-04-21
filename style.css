@@ -426,7 +426,7 @@ i::after {
 	width: 50vmin;
 	aspect-ratio: 1;
 	max-width: 300px;
-	background: var(--color-5);
+	border: 2vh solid var(--color-5);
 }
 
 /* Plane */
