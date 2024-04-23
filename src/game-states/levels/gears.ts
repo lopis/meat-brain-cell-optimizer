@@ -14,11 +14,13 @@ class TwoGearsLevel extends Level implements State {
   interval = 5 * 1000;
 
   onEnter() {
+    super.onEnter();
     range.value = '50';
     range.step = '10';
+    this.updateRange();
 
     W.reset(c2d);
-    W.camera({y:0.5,z:7, rx:-7, fov: 10});
+    W.camera({y:0.7,z:7, rx:-7, fov: 10});
     W.light({x:1,y:-5,z:-1});
     W.ambient(0.5);
 
@@ -27,8 +29,6 @@ class TwoGearsLevel extends Level implements State {
     
     W.group({n:"G2",ry:0});
     W.cube({g:"G2", w:0.5,h:1,d:1, x:0.25,y:0, b:colorWhite});
-
-    super.onEnter();
   }
 
   onUpdate(delta: number) {

@@ -1,7 +1,7 @@
 // WebGL framework
 // ===============
 
-const debug = 0; // Enable shader/program compilation logs (optional)
+const debug = 1; // Enable shader/program compilation logs (optional)
 
 const W = {
   
@@ -345,6 +345,12 @@ const W = {
     
     // Don't render invisible items (camera, light, groups, camera's parent)
     if(!just_compute){
+
+      if (!W.models[object.type]) {
+        debug && console.error(`Render error. Model for object type "${object.type}" not found`);
+        debugger;
+        return;
+      }
       
       // Set up the position buffer
       W.gl.bindBuffer(34962 /* ARRAY_BUFFER */, W.models[object.type].verticesBuffer);
@@ -625,7 +631,7 @@ W.add("pyramid", {
 //       =         =
 //          =   =
 
-((i, ai, j, aj, p1, p2, vertices = [], indices = [], uv = [], precision = 10) => {
+((i, ai, j, aj, p1, p2, vertices = [], indices = [], uv = [], precision = 8) => {
   for(j = 0; j <= precision; j++){
     aj = j * Math.PI / precision;
     for(i = 0; i <= precision; i++){

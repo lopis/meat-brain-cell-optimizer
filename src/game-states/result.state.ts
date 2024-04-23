@@ -3,7 +3,7 @@ import { gameData } from '@/core/game-data';
 import { State } from '@/core/state';
 import { gameStateMachine } from '@/game-state-machine';
 import W from '@/lib/w';
-import { levelListState } from './list';
+import { menuState } from './menu.state';
 
 type Result = {
   title: string
@@ -55,7 +55,7 @@ class ResultState implements State {
       }
     });
     thanks.addEventListener('click', () => {
-      gameStateMachine.setState(levelListState);
+      gameStateMachine.setState(menuState);
     });
   }
 

@@ -21,9 +21,11 @@ class HelixLevel extends Level implements State {
   expectedAngle = 360 / this.numObjects;
 
   onEnter() {
+    super.onEnter();
     range.value = '0';
     circleRange.toggle(true);
     circleRange.multiplier = 8;
+    this.updateRange();
 
     W.reset(c2d);
     W.camera({y:1,z:1.8, rx:-45, fov: 38});
@@ -33,7 +35,6 @@ class HelixLevel extends Level implements State {
       W.group({g:`GG${i}`, n:`G${i}`});
       W.pyramid({g:`G${i}`, n:`P${i}`, ns:1, w:WIDTH,h:HEIGHT,d:WIDTH, b:i%2?colorDark:colorWhite});
     }
-    super.onEnter();
   }
 
   updateObjects() {

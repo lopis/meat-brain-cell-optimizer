@@ -13,8 +13,11 @@ class CircleLevel extends Level implements State {
   offset = 0;
 
   onEnter() {
+    super.onEnter();
     range.value = '75';
     range2.value = '25';
+    this.updateRange();
+
     range2.classList.remove('hide');
     overlay.classList.remove('hide');
 
@@ -27,8 +30,6 @@ class CircleLevel extends Level implements State {
       const b = [colorWhite, color1, color2, color3][i%4];
       W.sphere({g:`G${i}`,n:`N${i}`, w:this.size,h:this.size,d:this.size, x:0,y:0.5, ns:1,b});
     }
-
-    super.onEnter();
   }
 
   easeInOutSine(x: number): number {

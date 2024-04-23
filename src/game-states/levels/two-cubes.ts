@@ -20,7 +20,9 @@ class TwoCubesLevel extends Level implements State {
   }
 
   onEnter() {
+    super.onEnter();
     range.value = '45';
+    this.updateRange();
 
     W.reset(c2d);
     W.camera({y:4,z:7, rx:-30, fov: 10});
@@ -32,7 +34,6 @@ class TwoCubesLevel extends Level implements State {
     
     W.group({n:"G2",ry:0});
     W.cube({g:"G2", w:1.5,h:1,d:1, x:0,y:0,b:colorWhite});
-    super.onEnter();
   }
 
   onLeave() {

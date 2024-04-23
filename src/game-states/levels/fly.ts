@@ -1,6 +1,5 @@
 import { State } from '@/core/state';
 import { Level } from '@/core/level.js';
-import { circleRange, circleRange2 } from '@/core/controls';
 import { exponencialSmoothing } from '@/core/draw-engine';
 
 const A1 = 90;
@@ -16,22 +15,19 @@ class FlyLevel extends Level implements State {
   targetAngle2 = A2;
 
   onEnter() {
+    super.onEnter();
     c2d.classList.add('hide');
     plane.classList.remove('hide');
     range2.classList.remove('hide');
+    this.updateRange();
 
     range.value = '50';
     range2.value = '50';
     this.updateAngles();
-
-    super.onEnter();
   }
 
   onLeave() {
     c2d.classList.remove('hide');
-    plane.classList.add('hide');
-    circleRange.toggle(false);
-    circleRange2.toggle(false);
     super.onLeave();
   }
 

@@ -13,7 +13,7 @@
   position: fixed;
   width: 100vmin;
   aspect-ratio: 1;
-  max-width: 600px;
+  max-width: 900px;
   image-rendering: pixelated; /* You definitely want this if you are doing pixel art */
 }
 
@@ -433,7 +433,7 @@ i::after {
 	transform: translate(-50%, -50%);
 	width: 50vmin;
 	aspect-ratio: 1;
-	max-width: 300px;
+	max-width: 400px;
 	border: 2vh solid var(--color-5);
 }
 
@@ -447,10 +447,10 @@ i::after {
   animation: rotate 1s alternate infinite ease-in-out;
   animation-delay: -0.5s;
   position: relative;
-  left: -20%;
+  left: 0%;
 }
 #plane path {
-  transform-origin: 72% 30%;
+  transform-origin: 65% 44%;
   transition: transform 100ms ease-in-out;
 }
 
@@ -464,9 +464,9 @@ i::after {
 }
 @keyframes rotate {
   from {
-    transform: rotate(20deg);
+    transform: rotate(0deg);
   }
   to {
-    transform: rotate(30deg);
+    transform: rotate(10deg);
   }
 }

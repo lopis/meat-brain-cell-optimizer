@@ -11,10 +11,12 @@ class CylinderLevel extends Level implements State {
   ry: number = 0;
 
   onEnter() {
+    super.onEnter();
     range.value = '75';
     range2.value = '95';
     range2.classList.remove('hide');
     overlay.classList.remove('hide');
+    this.updateRange();
 
     W.reset(c2d);
     W.camera({y:0,z:2, fov: 30});
@@ -22,8 +24,6 @@ class CylinderLevel extends Level implements State {
 
     W.group({n:"G1",ry:0});
     W.cylinder({g: "G1", n:"C1", w:0.7,h:1.8,d:0.7, x:0,y:0, rx:45, ns:1, b:color1});
-
-    super.onEnter();
   }
 
   onUpdate(delta: number) {

@@ -15,7 +15,9 @@ class MetronomeLevel extends Level implements State {
   score = 0;
 
   onEnter() {
+    super.onEnter();
     range.value = '0';
+    this.updateRange();
 
     W.reset(c2d);
     W.camera({y:0.5,z:7, rx:-7, fov: 10});
@@ -25,14 +27,12 @@ class MetronomeLevel extends Level implements State {
     
     W.group({n:"G2",ry:0});
     W.cube({g:"G2", w:0.1,h:1,d:0.1, x:0,y:0.5, ns:1,b:colorWhite});
-    super.onEnter();
   }
 
   onUpdate(delta: number) {
     this.time += delta;
     if (this.time > this.INTERVAL) {
       this.time -= this.INTERVAL;
-      console.log((Date.now() - this.prevTime) / 1000);
       this.prevTime = Date.now();
       
     }
