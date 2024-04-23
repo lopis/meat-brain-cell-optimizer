@@ -4,11 +4,14 @@ import W from '../../lib/w.js';
 import { Level } from '@/core/level';
 
 class TwoGearsLevel extends Level implements State {
-  frameG1 = 0;
-  frameG2 = 0;
+  timeG1 = 0;
+  timeG2 = 0;
+  angle1 = 0;
+  angle2 = 0;
   speed = -0.5;
   counter = 0;
   targetSpeed = 1;
+  interval = 5 * 1000;
 
   onEnter() {
     range.value = '50';
@@ -28,20 +31,22 @@ class TwoGearsLevel extends Level implements State {
     super.onEnter();
   }
 
-  onUpdate() {
-    this.frameG1++;
-    if (this.frameG1 > 360) {
-      this.frameG1 -= 360;
+  onUpdate(delta: number) {
+    this.timeG1 += delta;
+    if (this.timeG1 > this.interval) {
+      this.timeG1 -= this.interval;
     }
-    W.move({n:"G1",rx:this.frameG1,ry:45});
+    this.angle1 = 360 * this.timeG1 / this.interval;
+    W.move({n:"G1",rx:this.angle1,ry:45});
 
-    this.frameG2 += this.speed;
-    if (this.frameG2 > 360) {
-      this.frameG2 -= 360;
-    } else if (this.frameG2 < 0) {
-      this.frameG2 += 360;
+    this.timeG2 += delta * this.speed;
+    if (this.timeG2 > this.interval) {
+      this.timeG2 -= this.interval;
+    } else if (this.timeG2 < 0) {
+      this.timeG2 += this.interval;
     }
-    W.move({n:"G2",rx:this.frameG2,ry:45});
+    this.angle2 = 360 * this.timeG2 / this.interval;
+    W.move({n:"G2",rx:this.angle2,ry:45});
     
     this.counter++;
     if (this.counter > 20) {
@@ -57,10 +62,10 @@ class TwoGearsLevel extends Level implements State {
 
   calculatePower() {
     const speedDifference = 1 - Math.abs(this.targetSpeed - this.speed);
-    const phaseDifference = 1 - Math.abs((this.frameG1 % 90) - (this.frameG2 % 90)) / 90;
+    const phaseDifference = 1 - Math.abs(this.angle1%90 - this.angle2%90) / 90;
     
     // Exagerate the error
-    const value = Math.pow((speedDifference * phaseDifference), 5);
+    const value = Math.pow((speedDifference * phaseDifference), 3);
 
     super.calculatePower(value);
   }

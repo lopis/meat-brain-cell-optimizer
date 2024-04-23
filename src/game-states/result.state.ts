@@ -82,8 +82,7 @@ class ResultState implements State {
     result.classList.add('hide');
   }
 
-  onUpdate() {
-  }
+  onUpdate() {}
 }
 
 const resultState = new ResultState();

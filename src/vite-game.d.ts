@@ -34,4 +34,4 @@ declare const retry: HTMLButtonElement;
 declare const thanks: HTMLButtonElement;
 
 declare const overlay: HTMLDivElement;
-
+declare const closeBtn: HTMLButtonElement;

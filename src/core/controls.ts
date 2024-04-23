@@ -1,4 +1,6 @@
+import { gameStateMachine } from "@/game-state-machine";
 import { CircleRange } from "./circle-range";
+import { menuState } from "@/game-states/menu.state";
 
 const enum XboxControllerButton {
   A,
@@ -35,6 +37,10 @@ class Controls {
     document.addEventListener('keydown', event => this.toggleKey(event, true));
     document.addEventListener('keyup', event => this.toggleKey(event, false));
     this.inputDirection = new DOMPoint();
+
+    closeBtn.addEventListener('click', () => {
+      gameStateMachine.setState(menuState);
+    });
   }
 
   queryController() {

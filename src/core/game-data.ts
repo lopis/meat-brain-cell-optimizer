@@ -36,9 +36,10 @@ function getStorage(): number {
 
 class GameData {
   level = 0;
+  maxLevel = 0;
 
   constructor() {
-    this.level = getStorage();
+    this.maxLevel = getStorage();
   }
 
   getLevel() {

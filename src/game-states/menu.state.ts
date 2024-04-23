@@ -4,13 +4,19 @@ import { gameStateMachine } from '@/game-state-machine';
 import { introState } from './intro.state';
 import { levelListState } from './list';
 import { gameData } from '@/core/game-data';
-import { startAudio } from '@/core/audio';
+import { background, colorDark } from '@/core/draw-engine';
+import W from '@/lib/w';
+import { stopAudio } from '@/core/audio';
 
 class MenuState implements State {
   private selectedButton = 0;
   private buttons = [this.startGame, this.continueGame, this.toggleFullscreen];
 
   onEnter() {
+    stopAudio();
+    background(colorDark);
+    W.reset(c2d);
+    closeBtn.classList.add('hide');
     menu.classList.remove('hide');
     start.addEventListener('click', this.startGame);
     contGame.addEventListener('click', this.continueGame);
@@ -18,6 +24,7 @@ class MenuState implements State {
   }
 
   onLeave() {
+    closeBtn.classList.remove('hide');
     menu.classList.add('hide');
     start.removeEventListener('click', this.startGame);
     contGame.removeEventListener('click', this.continueGame);
@@ -53,7 +60,6 @@ class MenuState implements State {
 
   startGame() {
     gameData.level = 0;
-    startAudio();
     setTimeout(() => {
       gameStateMachine.setState(introState);
     }, 100);

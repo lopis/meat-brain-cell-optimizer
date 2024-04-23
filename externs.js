@@ -2,6 +2,7 @@
 let c2d;
 let circleRangeElement;
 let circleRangeElement2;
+let closeBtn;
 let contGame;
 let controls;
 let fps;

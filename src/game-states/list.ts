@@ -1,5 +1,4 @@
 import { State } from '@/core/state';
-import { controls } from '@/core/controls';
 import { gameStateMachine } from '@/game-state-machine';
 import { gameState } from './game.state';
 import { gameData, levels } from '@/core/game-data';
@@ -22,7 +21,7 @@ class LevelListState implements State {
     background(colorDark);
     list.innerHTML = '';
     for (let i = 0; i < levels.length; i++) {
-      list.innerHTML += `<button ${gameData.level < i ? 'disabled="disabled"': ''}">${i+1}</button>`;
+      list.innerHTML += `<button ${gameData.maxLevel < i ? 'disabled="disabled"': ''}">${i+1}</button>`;
     }
     lobby.classList.remove('hide');
   }
@@ -32,15 +31,7 @@ class LevelListState implements State {
     play.removeEventListener('click', this.startGame);
   }
 
-  onUpdate() {
-    this.updateControls();
-  }
-
-  updateControls() {
-    if (controls.isConfirm && !controls.previousState.isConfirm) {
-      this.startGame();
-    }
-  }
+  onUpdate() {}
 
   startGame() {
     gameStateMachine.setState(gameState);

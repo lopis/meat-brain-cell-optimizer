@@ -34,11 +34,20 @@ class BytebeatPlayer {
     
     this.source.start();
   }
+  
+  stop() {
+    this?.source?.stop();
+  }
 }
 
 export let player: BytebeatPlayer;
 export const startAudio = () => {
   player = new BytebeatPlayer();
-  player.start();
+  setTimeout(() => {
+    player.start();
+  }, 500);
+};
+export const stopAudio = () => {
+  player && player.stop();
 };
 

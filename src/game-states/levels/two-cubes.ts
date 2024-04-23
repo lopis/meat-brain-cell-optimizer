@@ -4,8 +4,11 @@ import W from '../../lib/w.js';
 import { Level } from '@/core/level';
 
 class TwoCubesLevel extends Level implements State {
-  frameG1 = 0;
-  frameG2 = 0;
+  interval = 8 * 1000;
+  timeG1 = 0;
+  timeG2 = 0;
+  angle1 = 0;
+  angle2 = 0;
   speed = -0.5;
   counter = 0;
   score = 0;
@@ -37,20 +40,22 @@ class TwoCubesLevel extends Level implements State {
     controls.classList.remove('slide');
   }
 
-  onUpdate() {
-    this.frameG1++;
-    if (this.frameG1 > 360) {
-      this.frameG1 -= 360;
+  onUpdate(delta: number) {
+    this.timeG1 += delta;
+    if (this.timeG1 > this.interval) {
+      this.timeG1 -= this.interval;
     }
-    W.move({n:"G1",ry:this.frameG1});
+    this.angle1 = 360 * (this.timeG1/this.interval);
+    W.move({n:"G1", ry: this.angle1});
 
-    this.frameG2 += this.speed;
-    if (this.frameG2 > 360) {
-      this.frameG2 -= 360;
-    } else if (this.frameG2 < 0) {
-      this.frameG2 += 360;
+    this.timeG2 += delta * this.speed;
+    if (this.timeG2 > this.interval) {
+      this.timeG2 -= this.interval;
+    } else if (this.timeG2 < 0) {
+      this.timeG2 += this.interval;
     }
-    W.move({n:"G2",ry:this.frameG2});
+    this.angle2 = 360 * (this.timeG2/this.interval);
+    W.move({n:"G2", ry: this.angle2});
     
     this.counter++;
     if (this.counter > 20) {
@@ -66,9 +71,9 @@ class TwoCubesLevel extends Level implements State {
 
   calculatePower() {
     const speedDifference = 1 - Math.abs(this.targetSpeed - this.speed);
-    const phaseDifference = 1 - Math.abs((this.frameG1 % 180) - (this.frameG2 % 180)) / 180;
+    const phaseDifference = 1 - Math.abs(this.angle1%180 - this.angle2%180) / 180;
     // Exagerate the error
-    this.score = Math.pow((speedDifference * phaseDifference), 5);
+    this.score = Math.pow((speedDifference * phaseDifference), 3);
 
     super.calculatePower(this.score);
   }

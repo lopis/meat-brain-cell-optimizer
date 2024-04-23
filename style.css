@@ -126,7 +126,7 @@ ul {
   align-content: stretch;
 }
 
-ul button {
+button {
 	--button-color: var(--color-2);
 	color: var(--color-dark);
 	background-color: var(--color-white);
@@ -142,6 +142,7 @@ ul button {
 	width: 100%;
 	display: inline-flex;
   justify-content: center;
+  align-items: center;
 	gap: 1em;
   border-radius: 99px;
 }
@@ -163,6 +164,19 @@ ul button:active {
     transform: translate(4px, 4px);
     box-shadow: 1px 1px var(--button-color);
   }
+}
+
+#closeBtn {
+	position: fixed;
+	top: 1em;
+	right: 1em;
+	padding: 0;
+	width: 1.5em;
+	height: 1.5em;
+	--button-color: transparent;
+	background: #757575;
+	box-shadow: none;
+	mix-blend-mode: luminosity;
 }
 
 ul button:hover {
@@ -321,19 +335,13 @@ input[type=range]::-moz-range-thumb {
 /* BUTTON */
 #submit {
   --button-color: var(--color-dark);
-	padding: 1vh;
-	border-radius: 999px;
 	height: 100px;
 	width: 100px;
 	background: var(--color-1);
-	border: 3px solid var(--button-color);
-	box-shadow: 5px 5px var(--button-color);
 	font-size: 30px;
 	font-weight: bold;
-	color: var(--color-dark);
   transition: all 100ms ease-in-out 50ms;
   flex-shrink: 0;
-  cursor: pointer;
 }
 #submit.clicked {
   animation: click 200ms;
