@@ -2,20 +2,19 @@
 const melody = [6, 5, 3, 3, 5, 5, 0, 5, -2, 0, -2, 0, 6, 3, 2, 3];
 const baseTrack = [2, 3, 2.5, 4];
 
-const f = (tt: number): number => {
-  const t = tt * 4;
-  const drums = Math.sin(Math.pow(10, (-t / 2048) % 8) * 60) / 4;
+const f = (t: number): number => {
+  const drums = Math.sin(Math.pow(10, (-(t+1) / 2048) % 8) * 60) / 8;
   const mainNote = Math.tan(Math.cbrt(Math.sin(t * melody[t >> 13 & 15] / 30)));
 
   const noteLengths = [2, 3, 4, 6, 8, 12, 16, 24];
-  const mainTrack = mainNote / noteLengths[t / [1, 1.5][t >> 12 & 1] >> 10 & 7] / 16;
+  const mainTrack = mainNote / noteLengths[t / [1, 1.5][t >> 12 & 1] >> 10 & 7] / 32;
 
-  const base = Math.cbrt(Math.asin(Math.sin(t / baseTrack[t >> 16 & 3] / 10))) / 32;
+  const base = Math.cbrt(Math.asin(Math.sin(t / baseTrack[t >> 16 & 3] / 10))) / 64;
   
   return (drums + mainTrack + base);
 };
 
-const SAMPLE_RATE = 8000;
+const SAMPLE_RATE = 32000;
 class BytebeatPlayer {
   source: AudioBufferSourceNode | null = null;
 
