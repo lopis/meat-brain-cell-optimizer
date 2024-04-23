@@ -45,6 +45,8 @@ class ResultState implements State {
       if(nextLevel) {
         gameStateMachine.setState(nextLevel);
       }
+      gameData.level++;
+      gameData.storeLevel();
     });
     retry.addEventListener('click', () => {
       const prevLevel = gameData.getLevel();
@@ -73,11 +75,6 @@ class ResultState implements State {
       thanks.classList.add('hide');
       result.classList.remove('hide');
       nextLevel.classList.toggle('hide', !this.pass);
-    }
-
-    if (this.pass && gameData.nextLevel()) {
-      gameData.level++;
-      gameData.storeLevel();
     }
   }
 

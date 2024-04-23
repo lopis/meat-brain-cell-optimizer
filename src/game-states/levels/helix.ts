@@ -10,7 +10,7 @@ const WIDTH = 0.2;
 class HelixLevel extends Level implements State {
   numObjects = 12; // Number of objects to draw in the circle
   radius = 0.9;
-  maxFrames = 1200;
+  maxFrames = 20 * 1000;
 
   frame = 0;
   counter = 0;
@@ -56,7 +56,7 @@ class HelixLevel extends Level implements State {
   }
 
   onUpdate(delta: number) {
-    this.frame += delta / 16;
+    this.frame += delta;
     if (this.frame >= this.maxFrames) {
       this.frame -= this.maxFrames;
     }
