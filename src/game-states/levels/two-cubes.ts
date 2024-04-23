@@ -9,15 +9,11 @@ class TwoCubesLevel extends Level implements State {
   speed = -0.5;
   counter = 0;
   score = 0;
-  inputListener: (event: Event) => void;
-  submitListener: () => void;
 
   targetSpeed = 1;
 
   constructor() {
     super();
-    this.inputListener = () => this.updateRange();
-    this.submitListener = () => this.submit();
   }
 
   onEnter() {

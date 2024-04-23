@@ -49,7 +49,6 @@ class CircleLevel extends Level implements State {
     }
 
     this.updateObjects();
-    this.updateRange();
     
     this.counter++;
     if (this.counter > 20) {
