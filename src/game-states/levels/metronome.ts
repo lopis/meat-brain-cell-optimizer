@@ -4,10 +4,11 @@ import W from '../../lib/w.js';
 import { Level } from '@/core/level.js';
 
 class MetronomeLevel extends Level implements State {
-  MAX_FRAMES = 60;
+  INTERVAL = 1 * 1000;
   AMPLITUDE_RANGE = 1.5;
 
-  frame = 0;
+  time = 0;
+  prevTime = 0;
   amplitudeG1 = 1;
   amplitudeG2 = 0;
   counter = 0;
@@ -27,13 +28,16 @@ class MetronomeLevel extends Level implements State {
     super.onEnter();
   }
 
-  onUpdate() {
-    this.frame++;
-    if (this.frame > this.MAX_FRAMES) {
-      this.frame = 0;
+  onUpdate(delta: number) {
+    this.time += delta;
+    if (this.time > this.INTERVAL) {
+      this.time -= this.INTERVAL;
+      console.log((Date.now() - this.prevTime) / 1000);
+      this.prevTime = Date.now();
+      
     }
-    W.move({n:"G1", x:-0.5, y:-0.5, rz: this.amplitudeG1 * 30 * Math.cos(2 * Math.PI * this.frame / this.MAX_FRAMES)});
-    W.move({n:"G2", x: 0.5, y:-0.5, rz: this.amplitudeG2 * 30 * Math.cos(2 * Math.PI * this.frame / this.MAX_FRAMES)});
+    W.move({n:"G1", x:-0.5, y:-0.5, rz: this.amplitudeG1 * 30 * Math.cos(2 * Math.PI * this.time / this.INTERVAL)});
+    W.move({n:"G2", x: 0.5, y:-0.5, rz: this.amplitudeG2 * 30 * Math.cos(2 * Math.PI * this.time / this.INTERVAL)});
     
     this.counter++;
     if (this.counter > 20) {
