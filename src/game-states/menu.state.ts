@@ -4,6 +4,7 @@ import { gameStateMachine } from '@/game-state-machine';
 import { introState } from './intro.state';
 import { levelListState } from './list';
 import { gameData } from '@/core/game-data';
+import { startAudio } from '@/core/audio';
 
 class MenuState implements State {
   private selectedButton = 0;
@@ -52,6 +53,7 @@ class MenuState implements State {
 
   startGame() {
     gameData.level = 0;
+    startAudio();
     setTimeout(() => {
       gameStateMachine.setState(introState);
     }, 100);
