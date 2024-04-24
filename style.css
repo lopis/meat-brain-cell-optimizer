@@ -177,6 +177,7 @@ button:active {
 	background: #757575;
 	box-shadow: none;
 	mix-blend-mode: luminosity;
+  mix-blend-mode: plus-lighter;
 }
 
 ul button:hover {
@@ -427,6 +428,7 @@ i::after {
 	display: inline-flex;
 	border-radius: 999px;
 	mix-blend-mode: hue;
+  mix-blend-mode: plus-lighter;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -448,6 +450,7 @@ i::after {
   animation-delay: -0.5s;
   position: relative;
   left: 0%;
+  height: 100%;
 }
 #plane path {
   transform-origin: 65% 44%;
