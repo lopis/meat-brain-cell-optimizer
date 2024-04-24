@@ -29,7 +29,7 @@ function getStorage(): number {
   const storage = localStorage.getItem('meat_brain_cell_optimizer__level') || "";
   const level = parseInt(storage);
 
-  if (levels[level]) {
+  if (level <= levels.length) {
     return level;
   } else {
     return 0;

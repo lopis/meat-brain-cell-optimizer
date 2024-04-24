@@ -79,7 +79,7 @@ class SwitchLevel extends Level implements State {
     console.log(diff1, diff2);
     
     // Exagerate the error
-    const value = Math.pow(1 - (diff1 + diff2)/2, 5);
+    const value = Math.pow(1 - (diff1 + diff2)/2, 4);
 
     super.calculatePower(value);
   }

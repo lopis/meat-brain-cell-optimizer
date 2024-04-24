@@ -4,6 +4,7 @@ import { State } from '@/core/state';
 import { gameStateMachine } from '@/game-state-machine';
 import W from '@/lib/w';
 import { menuState } from './menu.state';
+import { stopAudio } from '@/core/audio';
 
 type Result = {
   title: string
@@ -14,6 +15,7 @@ type Results = {
   perfect: Result;
   great: Result;
   bad: Result;
+  end: Result;
 }
 
 export const results: Results = {
@@ -31,6 +33,11 @@ export const results: Results = {
     pass: false,
     title: 'Disappointing',
     text: 'These results are not satisfactory. Try again.'
+  },
+  end: {
+    pass: true,
+    title: 'End of experiment',
+    text: 'You have demonstrated promising results for your species. We will keep in touch.',
   }
 };
 
@@ -44,6 +51,8 @@ class ResultState implements State {
       const nextLevel = gameData.nextLevel();
       if(nextLevel) {
         gameStateMachine.setState(nextLevel);
+      } else {
+        this.setEnd();
       }
       gameData.level++;
       gameData.storeLevel();
@@ -63,19 +72,9 @@ class ResultState implements State {
     background(colorDark);
     W.reset(c2d);
 
-    if (this.pass && !gameData.nextLevel()) {
-      resultTitle.innerText = 'End of experiment';
-      resultText.innerText = 'You have demonstrated promising results for your species. We will keep in touch.';
-      result.classList.remove('hide');
-      thanks.classList.remove('hide');
-      nextLevel.classList.add('hide');
-    } else {
-      resultTitle.innerText = this.title;
-      resultText.innerText = this.text;
-      thanks.classList.add('hide');
-      result.classList.remove('hide');
-      nextLevel.classList.toggle('hide', !this.pass);
-    }
+    thanks.classList.add('hide');
+    result.classList.remove('hide');
+    nextLevel.classList.toggle('hide', !this.pass);
   }
 
   onLeave() {
@@ -83,18 +82,32 @@ class ResultState implements State {
   }
 
   onUpdate() {}
+
+  setEnd() {
+    this.setResult(results.end);
+    thanks.classList.remove('hide');
+    nextLevel.classList.add('hide');
+    retry.classList.add('hide');
+    stopAudio();
+  }
+
+  setResult(result: Result) {
+    this.title = result.title;
+    this.text = result.text;
+    this.pass = result.pass;
+    resultTitle.innerText = this.title;
+    resultText.innerText = this.text;
+  }
 }
 
 const resultState = new ResultState();
 
-export const newResultState = (score: number) => {
+export function newResultState (score: number) {
   const result = score > 5 ? results.perfect
     : score > 4.5 ? results.great
     : results.bad;
 
-  resultState.title = result.title;
-  resultState.text = result.text;
-  resultState.pass = result.pass;
+  resultState.setResult(result);
   
   return resultState;
 };
