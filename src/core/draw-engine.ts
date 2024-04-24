@@ -14,8 +14,14 @@ function renderLeds() {
   }
 }
 
+function cap(x: number): number {
+  return x > 0.95 ? 1
+    : x < 0.05 ? 0
+    : x;
+}
+
 export function easeInOutSine (x: number): number {
-  return -(Math.cos(Math.PI * x) - 1) / 2;
+  return cap(-(Math.cos(Math.PI * x) - 1) / 2);
 };
 
 export function background(color: string) {
@@ -24,6 +30,33 @@ export function background(color: string) {
 
 export function exponencialSmoothing(value: number, target: number, elapsedMilis: number, speed: number = 3) {
   return value + (target - value) * (elapsedMilis * speed / 1000);
+}
+
+export function minAngleDistanceWithin90(angle1: number, angle2: number) {
+  // Normalize angles to be between 0 and 360 degrees
+  angle1 = (angle1 + 360) % 360;
+  angle2 = (angle2 + 360) % 360;
+
+  // Calculate the absolute difference
+  let diff = Math.abs(angle1 - angle2);
+
+  // If the absolute difference is greater than 180 degrees,
+  // subtract it from 360 degrees to get the minimum distance
+  if (diff > 180) {
+      diff = 360 - diff;
+  }
+
+  // Ensure the result is within 90 degrees
+  if (diff > 90) {
+    diff = 90 - (diff % 90);
+  }
+
+  // Ensure the result is within 45 degrees
+  if (diff > 45) {
+    diff = 45 - (diff % 45);
+  }
+
+  return diff;
 }
 
 class DrawEngine {

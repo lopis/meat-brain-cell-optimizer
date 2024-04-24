@@ -6,6 +6,7 @@ import { twoCubesLevel } from "@/game-states/levels/two-cubes";
 import { color4, color5, color6 } from "./draw-engine";
 import { flyLevel } from "@/game-states/levels/fly";
 import { circleLevel } from "@/game-states/levels/circle";
+import { switchLevel } from "@/game-states/levels/switch";
 
 export const levels = [
   metronomeLevel,
@@ -15,6 +16,7 @@ export const levels = [
   cylinderLevel,
   flyLevel,
   circleLevel,
+  switchLevel,
 ];
 
 export const levelColors = [

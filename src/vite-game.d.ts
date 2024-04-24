@@ -22,6 +22,9 @@ declare const controls: HTMLDivElement;
 declare const range: HTMLInputElement;
 declare const range2: HTMLInputElement;
 declare const submit: HTMLButtonElement;
+declare const switches: HTMLDivElement;
+declare const switch1: HTMLDivElement;
+declare const switch2: HTMLDivElement;
 declare const circleRangeElement: HTMLDivElement;
 declare const circleRangeElement2: HTMLDivElement;
 

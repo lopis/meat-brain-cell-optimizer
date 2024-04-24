@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 const melody = [6, 5, 3, 3, 5, 5, 0, 5, -2, 0, -2, 0, 6, 3, 2, 3];
+const melody2 = [4, 3, 5, 4, 3, 5, 6, 4, 3, 5, 4, 3, 5, 6, 4, 3];
 const baseTrack = [2, 3, 2.5, 4];
 
 const f = (t: number): number => {

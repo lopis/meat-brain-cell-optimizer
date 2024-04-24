@@ -21,7 +21,7 @@ export class Level {
   }
 
   hide() {
-    [range2, circleRangeElement, overlay, plane]
+    [range2, circleRangeElement, switches, overlay, plane]
     .map((e: HTMLElement|SVGElement) => e.classList.add('hide'));
   }
 

@@ -29,3 +29,6 @@ let start;
 let submit;
 let thanks;
 let thumb;
+let switches;
+let switch1;
+let switch2;
