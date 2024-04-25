@@ -40,14 +40,11 @@ class SwitchLevel extends Level implements State {
     W.light({x:1,y:-5,z:-1});
     W.ambient(0.1);
 
-    W.group({n:"G1"});
-    W.cube({g:"G1", w:0.33,h:1,d:1, x:-0.33,y:0, b:colorWhite});
+    W.cube({n:"G1", w:0.33,h:1,d:1, x:-0.33,y:0, b:colorWhite});
     
-    W.group({n:"G2"});
-    W.cube({g:"G2", w:0.33,h:1,d:1, x:0.0,y:0, b:colorDark});
+    W.cube({n:"G2", w:0.33,h:1,d:1, x:0.0,y:0, b:colorDark});
 
-    W.group({n:"G3"});
-    W.cube({g:"G3", w:0.33,h:1,d:1, x:0.33,y:0, b:colorWhite});
+    W.cube({n:"G3", w:0.33,h:1,d:1, x:0.33,y:0, b:colorWhite});
   }
 
   onLeave() {
@@ -69,9 +66,10 @@ class SwitchLevel extends Level implements State {
 
     for(let i = 0; i < 3; i++) {
       this.angles[i] += this.states[i] *  delta / this.interval;
-      const s = 0.7 + 0.3 * this.sizes[i];
       const rx = 360 * this.angles[i];
-      W.move({n:`G${i+1}`, rx, h:s,d:s});
+
+      const b = this.selected === i ? colorDark : colorWhite;
+      W.move({n:`G${i+1}`, rx, b});
     }
     
     this.counter++;
