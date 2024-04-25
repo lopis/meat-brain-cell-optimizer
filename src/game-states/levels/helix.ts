@@ -1,84 +1,80 @@
-import { colorDark, colorWhite } from '@/core/draw-engine';
 import { State } from '@/core/state';
-import W from '../../lib/w.js';
-import { Level } from '@/core/level.js';
-import { circleRange } from '@/core/controls.js';
-
-const HEIGHT = 0.3;
-const WIDTH = 0.2;
+import { Level } from '@/core/level';
+import W from '@/lib/w';
+import { colorDark, colorWhite } from '@/core/draw-engine';
+import { circleRange, circleRange2 } from '@/core/controls';
 
 class HelixLevel extends Level implements State {
-  numObjects = 12; // Number of objects to draw in the circle
-  radius = 0.9;
-  maxFrames = 20 * 1000;
-
-  frame = 0;
   counter = 0;
+  time1 = 0;
+  time2 = 0;
+  interval = 2 * 1000;
 
-  radiusOffset = 0;
-  objectArc = 360 / this.numObjects;
-  expectedRadius = 0.8;
-  expectedAngle = 360 / this.numObjects;
+  speed = 1.5;
+  angleOffset = 180;
+  ry1 = 0;
+  ry2 = 0;
 
   onEnter() {
+    // two wave SVGs enterlaced
+    // the user has to synchronize the phase
+    // and the speed of the waves
+    // to form a correct helix shape
+
     super.onEnter();
-    range.value = '0';
-    circleRange.toggle(true);
-    circleRange.multiplier = 8;
-    this.updateRange();
-
     W.reset(c2d);
-    W.camera({y:1,z:1.8, rx:-45, fov: 38});
-
-    for (let i = 0; i < this.numObjects; i++) {
-      W.group({n:`GG${i}`});
-      W.group({g:`GG${i}`, n:`G${i}`});
-      W.pyramid({g:`G${i}`, n:`P${i}`, ns:1, w:WIDTH,h:HEIGHT,d:WIDTH, b:i%2?colorDark:colorWhite});
-    }
+    range.classList.add('hide');
+    circleRange.toggle(true);
+    circleRange2.toggle(true);
+    W.camera({x:0,y:0,z:1.8, rz:45});
+    W.ambient(1);
+    W.helix({n:'H1', w:0.1,d:0.1,h:1, ns:1,b:colorDark});
+    W.helix({n:'H2', w:0.1,d:0.1,h:1, ns:1,b:colorWhite});
   }
 
-  updateObjects() {
-    for (let i = 0; i < this.numObjects; i+=2) {
-        // Calculate the angle for each object
-        const ratio = 1 / this.numObjects;
-        const offset = i * ratio;
-        const pos = (offset + (this.frame / this.maxFrames));
-        const angleDeg = pos * 360;
-        const fastAngle = angleDeg * 8;
-
-        W.move({n:`GG${i}`, ry: angleDeg});
-        W.move({n:`G${i}`, rx: fastAngle, z: this.radius});
-        W.move({n:`P${i}`, y:HEIGHT/2});
-
-        W.move({n:`GG${i+1}`, ry: angleDeg + circleRange.getValue() - this.expectedAngle});
-        W.move({n:`G${i+1}`, rx: fastAngle+180, z: this.radius - this.radiusOffset});
-        W.move({n:`P${i+1}`, y:HEIGHT/2});
-    }
+  onLeave() {
+    super.onLeave();
   }
 
   onUpdate(delta: number) {
-    this.frame += delta;
-    if (this.frame >= this.maxFrames) {
-      this.frame -= this.maxFrames;
+    this.time1 += delta;
+    if (this.time1 > this.interval) {
+      this.time1 -= this.interval;
     }
-    this.updateObjects();
+    this.time2 += this.speed * delta;
+    if (this.time2 > this.interval) {
+      this.time2 -= this.interval;
+    } else if (this.time2 < 0) {
+      this.time2 += this.interval;
+    }
+
+    this.ry1 = 360 * this.time1 / this.interval;
+    W.helix({n:'H1', ry: this.ry1});
+
+    this.ry2 = 360 * this.time2 / this.interval - this.angleOffset;
+    W.helix({n:'H2', x:0.01,z:0.01, ry: this.ry2 - 180});
 
     this.counter++;
     if (this.counter > 20) {
       this.counter = 0;
       this.calculatePower();
     }
+
+    this.updateRange();
   }
 
   updateRange() {
-    this.radiusOffset = this.expectedRadius - (parseInt(range.value) / 100);
+    this.angleOffset = 360 * circleRange.getValue();
+    this.speed = 3 * (circleRange2.getValue() - 0.5);
+    this.speed = Math.round(this.speed * 5) / 5;
   }
 
   calculatePower() {
-    const radius = 1 - Math.abs(this.radiusOffset);
-    const angle = Math.max(0, 1 - Math.abs(this.expectedAngle - circleRange.getValue()));
-    const value = (angle + radius) / 2;
-    super.calculatePower(value);
+    const angleDiff = 1 - Math.abs(this.ry1 - this.ry2 + 360) % 360 / 360;
+    const speedDiff = Math.max(0, 1 - Math.abs(this.speed - 1));
+    console.log(angleDiff);
+    
+    super.calculatePower(speedDiff * angleDiff);
   }
 }
 

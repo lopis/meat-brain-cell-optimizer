@@ -690,4 +690,30 @@ W.add("pyramid", {
   W.add("cylinder", {vertices, uv, indices});
 })();
 
+// Helix
+((i, ai, j, aj, p1, p2, vertices = [], indices = [], uv = [], precision = 20) => {
+  for(j = 0; j <= precision; j++){
+    aj = j * Math.PI / precision;
+    const radius = j==0 || j==precision ? 0 : 0.5;
+    const offsetJ = j==0 ? j+1 : j==precision ? j-1 : j;
+    const y =  (((precision - offsetJ) / precision) - 0.5);
+    const spinNumber = 3;
+
+    for(i = 0; i <= precision; i++){
+      ai = i * 2 * Math.PI / precision;
+      let spin = spinNumber * Math.PI * y;
+      vertices.push(
+        (Math.sin(ai) * radius + Math.cos(spin)).toFixed(6),
+        y - radius * 0.05 * Math.sin(ai + spin + Math.PI / 2),
+        (Math.cos(ai) * radius + Math.sin(spin)).toFixed(6),
+      );
+      uv.push((Math.sin((i/precision))) * 3.5, -Math.sin(j/precision));
+      if(i < precision && j < precision){
+        indices.push(p1 = j * (precision + 1) + i, p2 = p1 + (precision + 1), (p1 + 1), (p1 + 1), p2, (p2 + 1));
+      }
+    }
+  }
+  W.add("helix", {vertices, uv, indices});
+})();
+
 export default W;

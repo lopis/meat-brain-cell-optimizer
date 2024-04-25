@@ -1,5 +1,6 @@
 import { twoGearsLevel } from "@/game-states/levels/gears";
 import { helixLevel } from "@/game-states/levels/helix";
+import { dockLevel } from "@/game-states/levels/dock";
 import { metronomeLevel } from "@/game-states/levels/metronome";
 import { cylinderLevel } from "@/game-states/levels/cylinder";
 import { twoCubesLevel } from "@/game-states/levels/two-cubes";
@@ -9,9 +10,10 @@ import { circleLevel } from "@/game-states/levels/circle";
 import { switchLevel } from "@/game-states/levels/switch";
 
 export const levels = [
+  helixLevel,
   metronomeLevel,
   twoCubesLevel,
-  helixLevel,
+  dockLevel,
   twoGearsLevel,
   cylinderLevel,
   flyLevel,

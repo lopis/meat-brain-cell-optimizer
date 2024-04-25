@@ -15,6 +15,9 @@ class SwitchLevel extends Level implements State {
   states = [1,1,1];
 
   onEnter() {
+    this.sizes = [0,1,0];
+    this.angles = [0.8,.16,.24];
+    this.states = [1,1,1];
     super.onEnter();
     range.classList.add('hide');
     switches.classList.remove('hide');
@@ -45,6 +48,11 @@ class SwitchLevel extends Level implements State {
 
     W.group({n:"G3"});
     W.cube({g:"G3", w:0.33,h:1,d:1, x:0.33,y:0, b:colorWhite});
+  }
+
+  onLeave() {
+    super.onLeave();
+    range.classList.remove('hide');
   }
 
   onUpdate(delta: number) {
