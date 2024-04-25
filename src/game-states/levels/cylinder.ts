@@ -35,8 +35,8 @@ class CylinderLevel extends Level implements State {
     this.targetRx = 90 - 90*r1 / 100;
     this.targetRy = 90 - 90*r2 / 100;
 
-    this.rx = exponencialSmoothing(this.rx, this.targetRx, delta);
-    this.ry = exponencialSmoothing(this.ry, this.targetRy, delta);
+    this.rx = exponencialSmoothing(this.rx, this.targetRx, delta, 10);
+    this.ry = exponencialSmoothing(this.ry, this.targetRy, delta, 10);
 
     W.move({n:'C1', rx:this.rx,ry:this.ry});
     this.calculatePower();
