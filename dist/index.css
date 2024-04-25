@@ -343,6 +343,7 @@ input[type=range]::-moz-range-thumb {
 	font-weight: bold;
   transition: all 100ms ease-in-out 50ms;
   flex-shrink: 0;
+  margin: 0;
 }
 #submit.clicked {
   animation: click 200ms;
@@ -490,4 +491,13 @@ i::after {
 	border-radius: 10px;
 	--button-color: var(--color-dark);
 	background: var(--color-2);
+}
+
+@media (max-height: 800px) {
+  #c2d, #plane {
+    margin-top: -10%;
+  }
+  #overlay {
+    margin-top: -5%;
+  }
 }
