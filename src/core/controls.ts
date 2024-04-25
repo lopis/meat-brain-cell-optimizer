@@ -70,6 +70,10 @@ class Controls {
     this.isRight = this.inputDirection.x > 0;
     this.isConfirm = Boolean(this.keyMap.get('Enter') || isButtonPressed(XboxControllerButton.A) || isButtonPressed(XboxControllerButton.Start));
     this.isEscape = Boolean(this.keyMap.get('Escape') || isButtonPressed(XboxControllerButton.Select));
+
+    if (this.isEscape) {
+      gameStateMachine.setState(menuState);
+    }
   }
 
   private toggleKey(event: KeyboardEvent, isPressed: boolean) {

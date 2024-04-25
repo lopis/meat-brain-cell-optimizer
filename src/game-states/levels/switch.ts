@@ -13,6 +13,22 @@ class SwitchLevel extends Level implements State {
   sizes = [0,1,0];
   angles = [0.8,.16,.24];
   states = [1,1,1];
+  changeSelected: () => void;
+  toggleMovement: () => void;
+
+  constructor() {
+    super();
+    this.changeSelected = () => {
+      if (this.progress >= 1) {
+        this.previous = this.selected;
+        this.selected = (this.selected + 1) % 3;
+        this.progress = 0;
+      }
+    };
+    this.toggleMovement = () => {
+      this.states[this.selected] = 1 - this.states[this.selected];
+    };
+  }
 
   onEnter() {
     this.sizes = [0,1,0];
@@ -23,17 +39,8 @@ class SwitchLevel extends Level implements State {
     switches.classList.remove('hide');
     this.updateRange();
 
-    switch1.addEventListener('click', () => {
-      if (this.progress >= 1) {
-        this.previous = this.selected;
-        this.selected = (this.selected + 1) % 3;
-        this.progress = 0;
-      }
-    });
-
-    switch2.addEventListener('click', () => {
-      this.states[this.selected] = 1 - this.states[this.selected];
-    });
+    switch1.addEventListener('click', this.changeSelected);
+    switch2.addEventListener('click', this.toggleMovement);
 
     W.reset(c2d);
     W.camera({x:-1.5,y:1.8,z:1.5, rx:-45, ry:-45});
@@ -50,6 +57,7 @@ class SwitchLevel extends Level implements State {
   onLeave() {
     super.onLeave();
     range.classList.remove('hide');
+    switches.classList.add('hide');
   }
 
   onUpdate(delta: number) {

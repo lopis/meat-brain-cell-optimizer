@@ -8,6 +8,7 @@ import { color4, color5, color6 } from "./draw-engine";
 import { flyLevel } from "@/game-states/levels/fly";
 import { circleLevel } from "@/game-states/levels/circle";
 import { switchLevel } from "@/game-states/levels/switch";
+import { metronome2Level } from "@/game-states/levels/metronome2";
 
 export const levels = [
   metronomeLevel,
@@ -19,6 +20,7 @@ export const levels = [
   circleLevel,
   switchLevel,
   helixLevel,
+  metronome2Level,
 ];
 
 export const levelColors = [

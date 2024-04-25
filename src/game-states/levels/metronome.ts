@@ -4,11 +4,10 @@ import W from '../../lib/w.js';
 import { Level } from '@/core/level.js';
 
 class MetronomeLevel extends Level implements State {
-  INTERVAL = 1 * 1000;
-  AMPLITUDE_RANGE = 1.5;
+  interval = 1 * 1000;
+  amplitudeRange = 1.5;
 
   time = 0;
-  prevTime = 0;
   amplitudeG1 = 1;
   amplitudeG2 = 0;
   counter = 0;
@@ -31,13 +30,12 @@ class MetronomeLevel extends Level implements State {
 
   onUpdate(delta: number) {
     this.time += delta;
-    if (this.time > this.INTERVAL) {
-      this.time -= this.INTERVAL;
-      this.prevTime = Date.now();
-      
+    if (this.time > this.interval) {
+      this.time -= this.interval;      
     }
-    W.move({n:"G1", x:-0.5, y:-0.5, rz: this.amplitudeG1 * 30 * Math.cos(2 * Math.PI * this.time / this.INTERVAL)});
-    W.move({n:"G2", x: 0.5, y:-0.5, rz: this.amplitudeG2 * 30 * Math.cos(2 * Math.PI * this.time / this.INTERVAL)});
+    const angle = 30 * Math.cos(2 * Math.PI * this.time / this.interval);
+    W.move({n:"G1", x:-0.5, y:-0.5, rz: this.amplitudeG1 * angle});
+    W.move({n:"G2", x: 0.5, y:-0.5, rz: this.amplitudeG2 * angle});
     
     this.counter++;
     if (this.counter > 20) {
@@ -47,7 +45,7 @@ class MetronomeLevel extends Level implements State {
   }
 
   updateRange() {
-    this.amplitudeG2 = this.AMPLITUDE_RANGE * (parseInt(range.value)) / 100;
+    this.amplitudeG2 = this.amplitudeRange * (parseInt(range.value)) / 100;
   }
 
   calculatePower() {
