@@ -2,6 +2,7 @@ import { gameStateMachine } from "@/game-state-machine";
 import { newResultState } from "@/game-states/result.state";
 import { background } from "./draw-engine";
 import { gameData } from "./game-data";
+import { startAudio, stopAudio } from "./audio";
 
 function updateLeds(totalLedsOn: number) {
   for (let index = 0; index < 5; index++) {
@@ -26,6 +27,8 @@ export class Level {
   }
 
   onEnter() {
+    stopAudio();
+    startAudio();
     background(gameData.color());
     range.addEventListener('input', this.inputListener);
     range2.addEventListener('input', this.inputListener);

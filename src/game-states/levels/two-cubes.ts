@@ -37,6 +37,7 @@ class TwoCubesLevel extends Level implements State {
   }
 
   onLeave() {
+    super.onLeave();
     document.removeEventListener('input', this.inputListener);
     controls.classList.remove('slide');
   }
