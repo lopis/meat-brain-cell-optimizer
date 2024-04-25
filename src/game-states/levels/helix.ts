@@ -33,6 +33,9 @@ class HelixLevel extends Level implements State {
   }
 
   onLeave() {
+    range.classList.remove('hide');
+    circleRange.toggle(false);
+    circleRange2.toggle(false);
     super.onLeave();
   }
 
@@ -72,8 +75,6 @@ class HelixLevel extends Level implements State {
   calculatePower() {
     const angleDiff = 1 - Math.abs(this.ry1 - this.ry2 + 360) % 360 / 360;
     const speedDiff = Math.max(0, 1 - Math.abs(this.speed - 1));
-    console.log(angleDiff);
-    
     super.calculatePower(speedDiff * angleDiff);
   }
 }

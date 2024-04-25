@@ -10,7 +10,6 @@ import { circleLevel } from "@/game-states/levels/circle";
 import { switchLevel } from "@/game-states/levels/switch";
 
 export const levels = [
-  helixLevel,
   metronomeLevel,
   twoCubesLevel,
   dockLevel,
@@ -19,6 +18,7 @@ export const levels = [
   flyLevel,
   circleLevel,
   switchLevel,
+  helixLevel,
 ];
 
 export const levelColors = [
