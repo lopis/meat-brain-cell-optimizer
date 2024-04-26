@@ -13,7 +13,7 @@ const htmlMinify = require('html-minifier');
 const tmp = require('tmp');
 const ClosureCompiler = require('google-closure-compiler').compiler;
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command }) => {
   const config = {
     server: {
       port: 3000,
@@ -62,10 +62,10 @@ function closurePlugin(): Plugin {
   };
 }
 
-async function applyClosure(js: string, chunk: any) {
+async function applyClosure(js: string) {
   const tmpobj = tmp.fileSync();
   // replace all consts with lets to save about 50-70 bytes
-  // ts-ignore
+  // @ts-ignore
   js = js.replaceAll('const ', 'let ');
 
   await fs.writeFile(tmpobj.name, js);
