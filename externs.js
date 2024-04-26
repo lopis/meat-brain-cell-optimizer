@@ -6,7 +6,6 @@ let closeBtn;
 let contGame;
 let controls;
 let fps;
-let fullscreen;
 let intro;
 let lights;
 let list;

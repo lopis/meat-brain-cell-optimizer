@@ -14,7 +14,6 @@ declare const menu: HTMLDivElement;
 declare const intro: HTMLDivElement;
 declare const start: HTMLLIElement;
 declare const contGame: HTMLLIElement;
-declare const fullscreen: HTMLLIElement;
 declare const play: HTMLLIElement;
 
 declare const lights: HTMLDivElement;

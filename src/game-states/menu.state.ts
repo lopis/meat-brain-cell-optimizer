@@ -10,7 +10,7 @@ import { stopAudio } from '@/core/audio';
 
 class MenuState implements State {
   private selectedButton = 0;
-  private buttons = [this.startGame, this.continueGame, this.toggleFullscreen];
+  private buttons = [this.startGame, this.continueGame];
 
   onEnter() {
     stopAudio();
@@ -20,7 +20,6 @@ class MenuState implements State {
     menu.classList.remove('hide');
     start.addEventListener('click', this.startGame);
     contGame.addEventListener('click', this.continueGame);
-    fullscreen.addEventListener('click', this.toggleFullscreen);
   }
 
   onLeave() {
@@ -28,7 +27,6 @@ class MenuState implements State {
     menu.classList.add('hide');
     start.removeEventListener('click', this.startGame);
     contGame.removeEventListener('click', this.continueGame);
-    fullscreen.removeEventListener('click', this.toggleFullscreen);
   }
 
   onUpdate() {
@@ -69,14 +67,6 @@ class MenuState implements State {
     setTimeout(() => {
       gameStateMachine.setState(levelListState);
     }, 100);
-  }
-
-  toggleFullscreen() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
   }
 }
 
