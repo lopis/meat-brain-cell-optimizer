@@ -41,7 +41,7 @@ yarn dev
 
 Bytebeat music composed with inspiration from several online examples, namely from
 
-- [Bytebeat Composer][https://dollchan.net/bytebeat/]
-- [Bytebeat Guide][https://www.reddit.com/r/bytebeat/comments/rh4eyq/i_made_a_bytebeat_guide/] by Ravary
-- [The absolute beginner’s guide to coding Bytebeats][https://nightmachines.tv/downloads/Bytebeats_Beginners_Guide_TTNM_v1-5.pdf] by The Tuesday Night Machines
-- [Loks of snippets and examples on reddit](https://www.reddit.com/r/bytebeat/comments/20km9l/cool_equations/)
+- [Bytebeat Composer](https://dollchan.net/bytebeat/)
+- [Bytebeat Guide](https://www.reddit.com/r/bytebeat/comments/rh4eyq/i_made_a_bytebeat_guide/) by Ravary
+- [The absolute beginner’s guide to coding Bytebeats](https://nightmachines.tv/downloads/Bytebeats_Beginners_Guide_TTNM_v1-5.pdf) by The Tuesday Night Machines
+- [Lots of bytebeat snippets and examples on reddit](https://www.reddit.com/r/bytebeat/comments/20km9l/cool_equations/)
